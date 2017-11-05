@@ -88,3 +88,94 @@ b = a
 c = a.copy()
 ```
 
+### if key not found then set it to some default value
+
+```python
+a = {'a': 1}
+a.setdefault('e', 0)
+>>{'a': 1, 'e': 0}
+# if 'e' is found in dict then it wont be touched, if not found then it will be set to the default value of 0
+```
+
+### creating sets
+
+```python
+vowels = { 'a', 'e', 'e', 'i', 'o', 'u', 'u' }
+>>> vowels
+{'e', 'u', 'a', 'i', 'o'}
+```
+
+### creating sets method 2
+
+```python
+vowels2 = set('aeeiouu')
+>>> vowels2
+{'e', 'u', 'a', 'i', 'o'}
+```
+
+### take union of set
+
+```python
+vowels = set('aeiou')
+word = 'hello'
+u = vowels.union(set(word))
+>> {'a', 'e', 'i', 'o', 'u', 'h', 'l'}
+```
+
+### whats not shared (difference)
+
+```python
+vowels = set('aeiou')
+word = 'hello'
+d = vowels.difference(set(word))
+>>> d
+{'u', 'i', 'a'}
+```
+
+### find intersection of sets
+
+```python
+vowels = set('aeiou')
+word = 'hello'
+i = vowels.intersection(set(word))
+>>> i
+{'e', 'o'}
+```
+
+### create a tuple
+
+```python
+a = ('a', 'e', 'i')
+```
+
+### create a tuple of single object
+
+```python
+a = ('a',)
+# Make sure there is a comma at the end inside a tuple if you want to create a tuple of single object
+```
+
+### create empty data structure
+
+```python
+l = list()
+s = set()
+d = dict()
+t = tuple()
+```
+
+### specify accepted data type and return type in a function
+
+```python
+def search4vowels(word:str) -> set:
+  """Return any vowels found in a supplied word."""
+  vowels = set('aeiou')
+  return vowels.intersection(set(word))
+```
+
+### default arguments in functions
+
+```python
+def search4letters(phrase:str, letters:str='aeiou') -> set:
+```
+
