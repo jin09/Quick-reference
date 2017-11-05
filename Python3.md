@@ -1,4 +1,4 @@
-# Python quick reference
+# Python 3000 quick reference
 
 ### Quick look at contents of module
 
