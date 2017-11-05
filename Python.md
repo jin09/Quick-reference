@@ -195,3 +195,55 @@ def do_search() -> 'html':
   # do stuff
   return jsonify(res)
 ```
+
+### MYSQL Driver python
+
+```python
+import mysql.connector
+
+dbconfig = { 'host': '127.0.0.1',
+             'user': 'vsearch',
+             'password': 'vsearchpasswd',
+             'database': 'vsearchlogDB', }
+
+conn = mysql.connector.connect(**dbconfig)
+
+cursor = conn.cursor()
+
+_SQL = """show tables"""
+
+cursor.execute(_SQL)
+
+# result don't appear immmidiately, we have to request them explicitly
+
+"""
+You can ask for results using one of three cursor methods:
+•	 cursor.fetchone retrieves a single row of results.
+•	 cursor.fetchmany retrieves the number of rows you specify.
+•	 cursor.fetchall retrieves all the rows that make up the results.
+"""
+
+res = cursor.fetchall()
+>>> res
+[('log',)]
+
+# fetchAll returns list of tuples
+# fetchone returns single tuple
+
+"""
+Any insert operation doesn't directly insert into the database, 
+it first goes to the database cache and later this cache is executed to the actual server disk,
+so if there is any select query before cache is committed then select query will not return the data,
+so it is advised to commit the cached data
+"""
+
+conn.commit()
+
+# close the cursor
+
+cursor.close()
+
+# close the connection
+
+conn.close()
+```
