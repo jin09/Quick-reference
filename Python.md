@@ -179,3 +179,16 @@ def search4vowels(word:str) -> set:
 def search4letters(phrase:str, letters:str='aeiou') -> set:
 ```
 
+### Flask write logs to a file
+
+```python
+def log_request(req: 'flask_request', res: str) -> None:
+  with open('vsearch.log', 'a') as log:
+  print(req, res, file=log)
+
+@app.route('/', methods=['POST', 'GET'])
+def do_search() -> 'html':
+  log_request(request, results)
+  # do stuff
+  return jsonify(res)
+```
