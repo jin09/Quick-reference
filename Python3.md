@@ -262,3 +262,57 @@ class CountFromBy:
   def __repr__(self) -> str:
     return str(self.val)
 ```
+
+### 'with' statement and context management protocol
+
+```python
+"""
+What's needed in context manager?
+•	an __init__ method to perform initialization (if needed);
+•	an __enter__ method to do any setup; and
+•	an __exit__ method to do any teardown (a.k.a. tidying-up)
+"""
+
+class UseDatabase:
+   def __init__(self):
+      pass
+    
+   def __enter__(self):
+      pass
+    
+   def __exit__(self):
+      pass
+```
+
+### Example of context manager (self explainatory)
+
+```python
+import mysql.connector
+
+class UseDatabase:
+  
+  def __init__(self, config: dict) -> None:
+    self.configuration = config
+
+  def __enter__(self) -> 'cursor':
+    self.conn = mysql.connector.connect(**self.configuration)
+    self.cursor = self.conn.cursor()
+    return self.cursor
+  
+  def __exit__(self, exc_type, exc_value, exc_trace) -> None:
+    self.conn.commit()
+    self.cursor.close()
+    self.conn.close()
+    
+# how to use this context manager?
+
+dbconfig = { 'host': '127.0.0.1',
+             'user': 'vsearch',
+             'password': 'vsearchpasswd',
+             'database': 'vsearchlogDB', }
+
+with UseDatabase(dbconfig) as cursor:
+  _SQL = 'show tables'
+  cursor.execute(_SQL)
+  data = cursor.fetchall()
+```
