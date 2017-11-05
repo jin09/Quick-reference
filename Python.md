@@ -184,7 +184,7 @@ def search4letters(phrase:str, letters:str='aeiou') -> set:
 ```python
 def log_request(req: 'flask_request', res: str) -> None:
   with open('vsearch.log', 'a') as log:
-  print(req, res, file=log)
+    print(req, res, file=log)
 
 @app.route('/', methods=['POST', 'GET'])
 def do_search() -> 'html':
