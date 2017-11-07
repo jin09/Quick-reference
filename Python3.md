@@ -316,3 +316,9 @@ with UseDatabase(dbconfig) as cursor:
   cursor.execute(_SQL)
   data = cursor.fetchall()
 ```
+
+### Pass function to a function
+
+```python
+![pass function to a function](https://drive.google.com/file/d/1KQyGSVhfOkp0L9mcfDF20nY0-b99IyK-/view?usp=sharing)
+```
