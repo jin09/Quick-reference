@@ -323,4 +323,3 @@ with UseDatabase(dbconfig) as cursor:
 def apply(func: object, value: object) -> object:
   return func(value)
 ```
-![pass function to a function](https://drive.google.com/file/d/1KQyGSVhfOkp0L9mcfDF20nY0-b99IyK-/view?usp=sharing)
