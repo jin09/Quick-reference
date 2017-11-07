@@ -322,4 +322,115 @@ with UseDatabase(dbconfig) as cursor:
 ```python
 def apply(func: object, value: object) -> object:
   return func(value)
+  
+# using this apply function
+
+apply(print, "hello")
+>>> hello
+
+apply(len, 'abc')
+>>> 3
+```
+
+### Nested functions
+
+```python
+def outer():
+  
+  def inner():
+    print('This is inner.')
+  
+  print('This is outer, invoking inner.')
+  inner()
+  
+# Output ->
+This is outer, invoking inner.
+This is inner.
+```
+When would you ever use this?
+Looking at this simple example, you might find it hard to think of a situation
+where creating a function inside another function would be useful. However,
+when a function is complex and contains many lines of code, abstracting some of
+the function’s code into a nested function often makes sense (and can make the
+enclosing function’s code easier to read).
+
+### Return a function from function
+
+```python
+def outer():
+  
+  def inner():
+    print('This is inner.')
+  
+  print('This is outer, returning inner.')
+  return inner
+
+i = outer()
+>>> This is outer, returning inner.
+type(i)
+>>> <class 'function'>
+i()
+>>> This is inner
+```
+
+### Use * to accept an arbitrar y list of arguments
+
+```python
+def myfunc(*args):
+  for a in args:
+     print(a, end=' ')
+  if args:
+    print()
+ 
+myfunc(10)
+>>> 10
+myfunc(10, 20, 30, 40, 50)
+>>> 10, 20, 30, 40, 50
+```
+
+### * works on the way in, too
+
+If you provide a list to myfunc as an argument, the list (despite potentially
+containing many values) is treated as one item (i.e., it’s one list). To instruct the
+interpreter to expand the list to behave as if each of the list’s items were an
+individual argument, prefix the list’s name with the * character when invoking the
+function.
+
+```python
+values = [1, 2, 3, 4, 5]
+myfunc(values)
+>>> [1, 2, 3, 4, 5]
+
+# myfunc treats this list as 1 item
+# what if I want the function to treat it as list of args
+
+myfunc(*values)
+>>> 1 2 3 4 5
+```
+
+### Accepting a Dictionar of keyword Arguments
+
+```python
+def myfunc2(**kwargs):
+  for k,v in kwargs.items():
+    print(k, v, sep='->', end=' ')
+  if kwargs:
+    print()
+
+myfunc(a=2, b=3)
+>>> a->2 b->3
+```
+
+### ** works on the way in, too
+
+You probably guessed this was coming, didn’t you? As with *args, when you
+use **kwargs it’s also possible to use ** when invoking the myfunc2 function.
+
+```python
+dbconfig = { 'host': '127.0.0.1',
+            'user': 'vsearch',
+            'password': 'vsearchpasswd',
+            'database': 'vsearchlogDB', }
+            
+conn = mysql.connector.connect(**dbconfig)
 ```
