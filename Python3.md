@@ -320,5 +320,7 @@ with UseDatabase(dbconfig) as cursor:
 ### Pass function to a function
 
 ```python
-![pass function to a function](https://drive.google.com/file/d/1KQyGSVhfOkp0L9mcfDF20nY0-b99IyK-/view?usp=sharing)
+def apply(func: object, value: object) -> object:
+  return func(value)
 ```
+![pass function to a function](https://drive.google.com/file/d/1KQyGSVhfOkp0L9mcfDF20nY0-b99IyK-/view?usp=sharing)
