@@ -438,14 +438,14 @@ conn = mysql.connector.connect(**dbconfig)
 ### Fuction Decorators
 
 **Motivation** : Lets say I want to allow access to a route function only  
-if the user is logged in
-I can copy paste the login code in each function and that would do our job
-But Why would I copy paste the login code if I can create a simple function and call from
-wherever I want. That way code would be more elegant.
-But can I do even better, I don't want to disturb the functionality of the function 
-I only want to add the extra feature of login to the current state, and I want to reuse the 
-logic inside the function the next time I call it.
-So that we dont have to disturn the funtionality of a funtion, we have decorators in python.
+if the user is logged in  
+I can copy paste the login code in each function and that would do our job  
+But Why would I copy paste the login code if I can create a simple function and call from  
+wherever I want. That way code would be more elegant.  
+But can I do even better, I don't want to disturb the functionality of the function  
+I only want to add the extra feature of login to the current state, and I want to reuse the  
+logic inside the function the next time I call it.  
+So that we dont have to disturn the funtionality of a funtion, we have decorators in python.  
 
 
 Example - flask: add login to routes 
