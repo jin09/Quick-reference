@@ -408,7 +408,7 @@ myfunc(*values)
 >>> 1 2 3 4 5
 ```
 
-### Accepting a Dictionar of keyword Arguments
+### Accepting a Dictionary of keyword Arguments
 
 ```python
 def myfunc2(**kwargs):
@@ -433,4 +433,33 @@ dbconfig = { 'host': '127.0.0.1',
             'database': 'vsearchlogDB', }
             
 conn = mysql.connector.connect(**dbconfig)
+```
+
+### Fuction Decorators
+
+
+Example - flask: add login to routes 
+```python
+from flask import session
+
+from functools import wraps
+
+def check_logged_in(func):
+  @wraps(func)
+  def wrapper(*args, **kwargs):
+    if 'logged_in' in session:
+      return func(*args, **kwargs)
+    return 'You are NOT logged in.'
+  return wrapper
+  
+# Finally using this decorator in the actual routing code
+@app.route('/page1')
+@check_logged_in
+def page1() -> str:
+  return 'This is page 1.'
+  
+@app.route('/page3')
+@check_logged_in
+def page3() -> str:
+  return 'This is page 3.'
 ```
