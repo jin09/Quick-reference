@@ -492,3 +492,19 @@ def decorator_name(func):
     # 3. Code to execute INSTEAD of calling the decorated function.
   return wrapper
 ```
+
+### Exception Handling Done Right
+
+If exceptions are handled this way then we can know the exact error that was caused  
+and we can know the class of error and the most important info of all i.e LINE NUM of place where error took place
+
+```python
+def fuction_to_call():
+    try:
+        # critical code
+    except Exception, e:
+        print e.message
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno, exc_tb.tb_frame.f_code.co_filename)
+```
