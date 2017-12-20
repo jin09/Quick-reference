@@ -437,7 +437,7 @@ conn = mysql.connector.connect(**dbconfig)
 
 ### Fuction Decorators
 
-**Motivation** : Lets say I want to allow access to a route function only 
+**Motivation** : Lets say I want to allow access to a route function only  
 if the user is logged in
 I can copy paste the login code in each function and that would do our job
 But Why would I copy paste the login code if I can create a simple function and call from
