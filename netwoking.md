@@ -135,5 +135,17 @@ packet was lost or the response could not reach the computer. So same packet is
 resent because no acknowledgement was received. Packet sending pace reduces with  
 time and after a considerable amount of effort, the computer stops trying.  
 
+### How Traceroute works ? 
+
+Traceroute makes clever usage of TTL on a packet.  
+TTL - Time To Live, when TTL expires then error message sent to source of that packet  
+In reality when a packet is sent to a destination server then TTL starts with a high  
+value and is reduced by 1 whenever it hops by 1. So that if it ever gets stuck in  
+a infinite loop then the source can be notified that packet was undelivered.  
+
+This concept is used by traceroute to find hops.  
+`Traceroute` sends packet with TTL 0 then TTL 1 then TTL 2 and so on  
+till the error response from the destination is received. This way the  
+whole route can be traced from the packet journey,  
 
 
