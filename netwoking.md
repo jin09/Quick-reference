@@ -71,3 +71,12 @@ host -t A google.com
 -t = type  
 A = A type record  
 for google.com
+
+### Using `dig` for getting DNS records
+
+```
+dig google.com
+```
+It gives us more technical information as compared to `host` command.  
+`host` command is more human readable, whereas dig is used more at places  
+where scripts are to be written  
