@@ -1,4 +1,4 @@
-# Networking for web dev
+# Networking
 
 ### What is netcat (nc)
 
@@ -110,4 +110,30 @@ between my computer and 8.8.8.8 server
 sudo tcpdump -n port 53
 ```
 This command will monotor any TCP traffic that happen through port 53 (DNS)  
+
+### Small excercise and great learning
+
+monitor the TCP traffic on a closed port on some host, for example -  
+```
+sudo tcpdump -n port 12345
+```
+This is used to monitor traffic on port 12345  
+
+```
+nc www.google.com 12345
+```
+This will be used to send traffic to google on port 12345  
+
+*What do you observe?*  
+NC will ask computer to connect to google.com on port 12345  
+but since that port is closed, no matter how much the computer tries  
+it fails again and again.  
+When I observe traffic in `tcpdump` I observe that same packet is sent to  
+connect to google again and again but no success.  
+Another observation - same packet is sent because computer thinks that previous  
+packet was lost or the response could not reach the computer. So same packet is  
+resent because no acknowledgement was received. Packet sending pace reduces with  
+time and after a considerable amount of effort, the computer stops trying.  
+
+
 
