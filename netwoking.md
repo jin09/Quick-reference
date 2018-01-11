@@ -56,3 +56,18 @@ redirects to `https://www.eff.org/`
 
 These servers hold records which map host_name to IP addresses (IPV4 and IPV6)  
 there are various other records that they maintain but A type is most important (host name to IPV4)  
+
+### Look IP of any website using linux `host`  
+
+```
+host google.com
+```
+
+### Look at specific type of record in DNS
+
+```
+host -t A google.com
+```
+-t = type  
+A = A type record  
+for google.com
