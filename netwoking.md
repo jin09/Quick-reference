@@ -80,3 +80,10 @@ dig google.com
 It gives us more technical information as compared to `host` command.  
 `host` command is more human readable, whereas dig is used more at places  
 where scripts are to be written  
+
+### DNS record types
+
+1. A type - stores domain name vs IP address  
+2. C Name - it is an alias record  
+3. AAAA - IPV6 record
+4. NS - Name server records  
