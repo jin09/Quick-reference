@@ -87,3 +87,27 @@ where scripts are to be written
 2. C Name - it is an alias record  
 3. AAAA - IPV6 record
 4. NS - Name server records  
+
+## Network Stack
+
+1. Application Layer  
+2. Transport Layer - TCP/UDP  
+3. IP Layer  
+4. Physical Layer  
+
+### Monitor Network Trafic when some request is made
+
+```
+sudo tcpdump -n host 8.8.8.8
+```
+so if any kind of network flows between my computer and 8.8.8.8 then that  
+text would come up here  
+
+For example - make ping request to `8.8.8.8` and you will see the actual TCP traffic  
+between my computer and 8.8.8.8 server  
+
+```
+sudo tcpdump -n port 53
+```
+This command will monotor any TCP traffic that happen through port 53 (DNS)  
+
