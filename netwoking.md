@@ -148,4 +148,16 @@ This concept is used by traceroute to find hops.
 till the error response from the destination is received. This way the  
 whole route can be traced from the packet journey,  
 
+### NAT - Network Address Translation  
+
+NAT is maintained by the routers, as these actually solve the  
+problem of limited IPV4 addresses.  
+My router is assigned an IP address by my ISP and now my  
+router gives an new local IP to me. NAT keeps map of  
+public IP addresses and ports to local Ip addresses and  
+ports. This is how with limited IPV4 addresses we are able  
+to connect more people.  
+
+*Disadvantage*  
+Lookup for interface in a map is time consuming so IPV6 should be used
 
