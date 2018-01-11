@@ -124,7 +124,7 @@ nc www.google.com 12345
 ```
 This will be used to send traffic to google on port 12345  
 
-*What do you observe?*  
+**What do you observe?**  
 NC will ask computer to connect to google.com on port 12345  
 but since that port is closed, no matter how much the computer tries  
 it fails again and again.  
@@ -158,6 +158,6 @@ public IP addresses and ports to local Ip addresses and
 ports. This is how with limited IPV4 addresses we are able  
 to connect more people.  
 
-*Disadvantage*  
+**Disadvantage**  
 Lookup for interface in a map is time consuming so IPV6 should be used
 
