@@ -20,4 +20,4 @@ console.log(global_variable + ' ' + new_variable);
 ```
 
 **Best Practice**  
-Always write var before the variable !!
+Always write var before the variable declaration !!
