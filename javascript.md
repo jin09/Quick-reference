@@ -59,4 +59,13 @@ We can specify the function name as well when we write the anonymous functions.
 Infact it is a good practice to always write the function name while writing the anonymous  
 functions.  
 
+**3. One Time Anonymous Function, Executes immediately**  
+
+```javascript
+(function(){
+  alert("Hello World !!");
+})();
+```
+We didn't assign function to a variable, and this function gets executed  
+the moment it is seen.  
 
