@@ -33,3 +33,30 @@ function square(number) {
   return number * number;
 }
 ```
+
+**2. Anonymous Function Declaration**  
+This was made so that we could write functions the way we write  
+normal expressions. It gets clear with examples.  
+
+```javascript
+var square = function(number) { return number * number; }; 
+//By now the function is stored in the variable sqaure but not executed yet.
+
+//how to execute this function?
+console.log(square(4));
+```
+With this we can programmatically store functions in variables  
+
+**Note** We notice that in anonymous functions we don't specify the  
+function name when we are writing the function, but if I want to do  
+recursion in the anonymous function then how will I achieve that?  
+
+```javascript
+var factorial = function fac(n) { return n < 2 ? 1 : n * fac(n - 1); };
+```
+
+We can specify the function name as well when we write the anonymous functions.  
+Infact it is a good practice to always write the function name while writing the anonymous  
+functions.  
+
+
