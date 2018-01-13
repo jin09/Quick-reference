@@ -20,4 +20,16 @@ console.log(global_variable + ' ' + new_variable);
 ```
 
 **Best Practice**  
-Always write var before the variable declaration !!
+Always write var before the variable declaration !!  
+
+### Javascript and Functions
+
+**1. Normal Function Declaration**  
+This is a pretty straight forward method of declaring functions,  
+just like the way we do in other languages like C++ etc.  
+
+```javascript
+function square(number) {
+  return number * number;
+}
+```
