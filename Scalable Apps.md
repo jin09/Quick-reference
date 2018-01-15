@@ -34,3 +34,30 @@ Google Cloud Platform also manages other shortfalls that we missed for us..
 ## Datastore Analogy
 
 ![Image](../master/assets/datastore_analogy.png?raw=true)  
+
+## Datastore queries
+
+```python
+import db from google.ext.datastore
+
+class Users(db.Model):
+  name = StringProperty()
+  user_id = IntegerProperty()
+  
+# Makes a query object of a kind
+query_obj = Users.query()
+
+# filter the contents
+query_obj.filter(Users.name == 'sam')
+
+# Order the result
+query_obj.order(Users.name)
+
+query_obj.get() # Gets 1 st result
+query_obj.fetch() # Gets all results
+query_obj.fetch(5) # Gets first 5 results
+
+for result in query_obj:
+  # iterate the cursor
+
+```
