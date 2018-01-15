@@ -281,3 +281,20 @@ so the parent or the fallback object is looked for that particular property.
 The image below gives us better understanding of what it means by `Prototype Chaining`  
 
 ![Image](../master/assets/prototype_chains.png?raw=true)
+
+## Class Pattern in JS
+```javascript
+var Car = function(location){
+  var obj = {loc: location};
+  obj.move = function(){
+    obj.loc++;
+  }
+  return obj;
+};
+
+var bob_car = Car(3);
+var amy_car = Car(2);
+bob_car.move();
+amy_car.move();
+```
+Car variable is a constructor that returns the object with data and functions.  
