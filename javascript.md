@@ -375,5 +375,23 @@ Car.methods = {
   }
 };
 ```
-Now methods won't have to copied, they will stay at top level  
+Now properties from method object won't have to be copied, they will stay at top level  
 when lookup for a method fails, parent in chain will be looked up  
+
+### Doing things the standard way, recommended by JS
+
+We have been creating classes and objects using the functional prototyping  
+Following is the recommended way of doing the same thing  
+```javascript
+var Car = function(location){
+  var obj = Object.create(Car.prototype);
+  obj.loc = location;
+  return obj;
+};
+
+Car.prototype.move = function(){this.loc++;};
+```
+We have this `prototype` inbuilt by javascript for us  
+So all the common data must be added to this prototype object.  
+this prototype acts as shared common storage  
+
