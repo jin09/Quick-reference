@@ -69,7 +69,69 @@ functions.
 We didn't assign function to a variable, and this function gets executed  
 the moment it is seen.  
 
-### First Class Functions  
+### First Class functions 
 
-**It means to treat functions as regular variables and objects so that it can be passed, returned, assigned to a variable**  
+**Languages that give the capability to treat functions as regular variables and objects**  
+These functions can be **stored in a variable, passed to a function, returned from another function**  
+Lets see all these with the help of examples  
 
+### Store Function in a variable  
+
+```javascript
+function square(x){
+  return x*x;
+}
+
+// function stored in variable
+var f = square  
+
+console.log(square);
+console.lof(f);
+console.log(square(5));
+console.log(f(5));
+```
+This way we can store function in a variable, and execute function from this variable  
+
+### Pass function to another function
+
+We can create a function that executes that passed function repeatedly on some array for example  
+```javascript
+function square(x){
+  return x*x;
+}
+
+function iterator(func, arr){
+  var result = [];
+  for(var i = 0; i < arr.length; i++){
+    result.push(func(arr[i]));
+  }
+  return result;
+}
+
+var array = [1, 2, 3, 4, 5];
+
+var res = iterator(square, array);
+```
+
+### Return function from another function  
+
+```javascript
+function html_tag(tag){
+  function wrap_text(msg){
+    console.log('<' + tag +'>' + msg + '</' + tag + '>')
+  }
+  return wrap_text
+}
+
+print_h1 = html_tag('h1')
+
+print_h1('Test Headline!')
+print_h1('Another Headline!')
+
+
+print_p = html_tag('p')
+print_p('Test Paragraph!')
+```
+**Note:** When we return the inner function, the inner function **remembers**  
+the lacal variables of the outer functions. This is called a **CLOSURE**  
+**Closures are inner functions that remember the state, or the local variables of outer function**
