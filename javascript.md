@@ -429,7 +429,7 @@ ben_car.move();
 ```
 We had to use `new` to create object this time, so we were able to remove 2 extra lines of code this way  
 
-### Superclasses and Subclasses
+### Superclasses and Subclasses in Functional Design Pattern
 
 Lets say we have 2 types cars, vans and cop cars. They both have  
 common property of car but one has extra method to call and other  
