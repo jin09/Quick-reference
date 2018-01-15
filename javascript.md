@@ -69,3 +69,7 @@ functions.
 We didn't assign function to a variable, and this function gets executed  
 the moment it is seen.  
 
+### First Class Functions  
+
+**It means to treat functions as regular variables and objects so that it can be passed, returned, assigned to a variable**  
+
