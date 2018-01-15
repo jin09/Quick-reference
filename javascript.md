@@ -339,3 +339,21 @@ methods = {
   }
 };
 ```
+
+**Slight Problem**  
+methods object doesn't really tell me which object's methods are these  
+**Solution**
+```javascript
+var Car = function(location){
+  var obj = {loc: location};
+  extend(obj, Car.methods); //this is equivalent to running a loop and copying
+  return obj;
+};
+
+Car.methods = {
+  move : function(){
+    this.loc++;
+  }
+};
+```
+Simply make this `method` object, a part of Car object
