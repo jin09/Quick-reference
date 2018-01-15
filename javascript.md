@@ -258,7 +258,7 @@ for(var key in obj){
 new_obj.hobby = "Dancing";
 ```
 
-### 2. Copy object Prototype Chaining  
+### 2. Copy object through Prototype Chaining  
 
 Earlier we copied object by taking snapshot so the data is not in sync  
 in both the objects.  
@@ -266,6 +266,18 @@ If I want to lookup a property and I don't find it, I want to lookup
 that property in the parent object then this is what we use.  
 
 ```javascript
+var obj = {};
+obj.name = "Mike";
+obj['age'] = 25;
 
+var new_obj = Object.create(obj); // this parameter passed is the fallback function
+
+new_obj.hobby = 'guitar';
+console.log(new_obj.name);
 ```
+We see that `name` property is not found in the `new_obj`  
+so the parent or the fallback object is looked for that particular property.  
+
+The image below gives us better understanding of what it means by `Prototype Chaining`  
+
 ![Image](../master/assets/prototype_chains.png?raw=true)
