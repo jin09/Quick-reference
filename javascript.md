@@ -233,3 +233,10 @@ and so the logged output would be
 {color: "green"} 
 {color: "blue"}
 ```
+## Objects
+
+```javascript
+var obj = {};
+obj.name = "Mike";
+obj['age'] = 25;
+```
