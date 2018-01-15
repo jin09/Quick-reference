@@ -547,3 +547,23 @@ array = [1, 2, 3, 4, 5]
 
 iterator(square, array)
 ```
+
+### Return function from another function  
+
+```python
+def html_tag(tag):
+
+    def wrap_text(msg):
+        print('<{0}>{1}</{0}>'.format(tag, msg))
+
+    return wrap_text
+
+print_h1 = html_tag('h1')
+print_h1('Test Headline!')
+print_h1('Another Headline!')
+
+print_p = html_tag('p')
+print_p('Test Paragraph!')
+```
+**Note:** When we return the inner function, the inner function **remembers**  
+the lacal variables of the outer functions. This is called a **CLOSURE**  
