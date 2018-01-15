@@ -395,3 +395,36 @@ We have this `prototype` inbuilt by javascript for us
 So all the common data must be added to this prototype object.  
 this prototype acts as shared common storage  
 
+### Pseudoclassical Patterns
+
+It is very close to the prototypical pattern that we have written example for above  
+But pseudotypical is minor improvement as it reduces redundant code.  
+
+**What do you think is redundant in prototypical pattern code below?**  
+```javascript
+1. var Car = function(location){
+2.   var obj = Object.create(Car.prototype);
+3.   obj.loc = location;
+4.   return obj;
+5. };
+6. 
+7. Car.prototype.move = function(){this.loc++;};
+```
+Line **2 and 4** are going to be common to all the constructors so we must avoid writing duplicate code.  
+
+Pseudoclassical classes allow us to remove this redundancy by using the `new` operator  
+When we use this `new` operator, the system undergoes a special constructor where we don't  
+need to specifically create an object and return it, JS does that internally for us.  
+```javascript
+var Car = function(location){
+  //this = Object.create(Car.prototype);
+  this.loc = location;
+  //return this;
+};
+
+Car.prototype.move = function(){this.loc++;};
+
+var ben_car = new Car(2);
+ben_car.move();
+```
+We had to use `new` to create object this time, so we were able to remove 2 extra lines of code this way  
