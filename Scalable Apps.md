@@ -61,3 +61,19 @@ for result in query_obj:
   # iterate the cursor
 
 ```
+
+## Indexing and datastore
+By default google datastore indexes all the properties  
+It makes it able to query on that property fast.  
+But creating index on all the entities is expensive during write operation  
+We must create index on only those that are needed  
+
+We can specify which property not to index  
+
+```python
+import db from google.ext.datastore
+
+class Users(db.Model):
+  name = StringProperty(indexed=False)
+  user_id = IntegerProperty(indexed=False)
+```
