@@ -476,3 +476,42 @@ var Cop = function(loc){
 }
 ```
 We were able to move redundant code in the Car superclass  
+
+### Subclassing in pseudoclassical pattern
+
+Subclassing in functional pattern is pretty easy, but how do we do it in pseudoclassical  
+We want to create a Van subclass that has extra feature to grab on top of Car features  
+```javascript
+var Car = function(loc){
+    this.loc = loc;
+};
+Car.prototype.move = function(){
+    this.loc++;
+};
+
+var Van = function(loc){
+    Car.call(this, loc);
+    /*
+    Instead of the above line of code, we can also do - 
+    this = new Car(loc);
+    But this line is a little memory inefficient as we create van object and car object 
+    and at the end, we discard one of those objects.
+    So the above used code is the most efficient way of doing stuff.
+    */
+};
+Van.prototype = Object.create(Car.prototype);
+Van.prototype.constructor = Van;
+Van.prototype.grab = function(){
+	/*...*/
+};
+
+var zed = new Car(3);
+zed.move();
+
+var amy = new Van(9);
+amy.move();
+amy.grab
+```
+Those extra lines of code on Van.prototype may look confusing to you in future  
+refer the tutorials in link below to regain lost clarity of concept. Document if possible  
+[link to tutorial!](https://classroom.udacity.com/courses/ud015/lessons/2794468541/concepts/26931585660923)
