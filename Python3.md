@@ -514,3 +514,19 @@ def fuction_to_call():
 **Languages that give the capability to treat functions as regular variables and objects**  
 These functions can be stored in a variable, passed to a function, returned from another function  
 Lets see all these with the help of examples  
+
+### Store Function in a variable  
+
+```python
+def square(x:int)->int:
+  return x*x
+  
+executed_answer = square(4)
+stored_function = square
+
+print(executed_answer) # 16
+print(stored_function) # function<0x1f23f4f2a2>
+print(stored_function(5)) # 25
+```
+This way we can store function in a variable, and execute function from this variable  
+
