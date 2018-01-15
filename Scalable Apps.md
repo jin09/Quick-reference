@@ -151,3 +151,56 @@ def _conferenceRegistration(self, request, reg=True):
     conf.put()
     return BooleanMessage(data=retval)
 ```
+
+## Memcache
+
+![Image](../master/assets/memcache.png?raw=true)  
+
+## Task Queues
+A response must complete within 60 seconds.  
+But let's say that we receive a request which takes hours to complete,  
+we can;t keep our user waiting that long right?  
+For for very long tasks, we have the concept of task queues
+![Image](../master/assets/task_queues.png?raw=true)  
+
+**Where can we use task queues?**  
+![Image](../master/assets/task_queues_usage.png?raw=true)  
+
+### Http Request vs Task Queues
+
+![Image](../master/assets/http_vs_task_queue.png?raw=true)  
+
+### 1. Push Queues
+App Engine has threads that scan these queues and pick up tasks  
+![Image](../master/assets/push_queues.png?raw=true)  
+
+These threads execute each task one by one and call the URL specified  
+![Image](../master/assets/push_queues_1.png?raw=true)  
+
+**Execution time for each task is 10 minutes, so bigger tasks should be broken down  
+into sub tasks**
+
+### How to create a Push Queue Task?
+
+![Image](../master/assets/task_queues_2.png?raw=true)  
+![Image](../master/assets/task_queues_2.png?raw=true)  
+
+```python
+from google.appengine.api import taskqueue
+
+# Look for TODO 2
+# create Conference, send email to organizer confirming
+# creation of Conference & return (modified) ConferenceForm
+Conference(**data).put()
+taskqueue.add(params={'email': user.email(),
+    'conferenceInfo': repr(request)},
+    url='/tasks/send_confirmation_email'
+)
+```
+
+### 1. Pull Queues
+App Engine doesn't executes these tasks, they are instead pulled by workers  
+using the REST API. If task not completed in time then task is put back  
+in the queue. If the external worker doesn't delete the task then also the  
+task is put back in the queue.
+![Image](../master/assets/pull_queues.png?raw=true)  
