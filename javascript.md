@@ -298,3 +298,23 @@ bob_car.move();
 amy_car.move();
 ```
 Car variable is a constructor that returns the object with data and functions.  
+
+### Reduce Redundancy  
+We see that every time an object gets created the function move is created again and again  
+this will consume a lot of memory and can easily be saved by creating 1 object and reusing it  
+```javascript
+var Car = function(location){
+  var obj = {loc: location};
+  var move = move;
+  return obj;
+};
+
+var move = function(){
+  this.loc++;
+}
+
+var bob_car = Car(3);
+var amy_car = Car(2);
+bob_car.move();
+amy_car.move();
+```
