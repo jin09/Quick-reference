@@ -530,3 +530,20 @@ print(stored_function(5)) # 25
 ```
 This way we can store function in a variable, and execute function from this variable  
 
+### Pass function to another function
+
+We can create a function that executes that passed function repeatedly on some array for example  
+```python
+def square(x:int)->int:
+  return x*x
+
+def iterator(func, array):
+  result = []
+  for i in array:
+    result.append(func(i))
+  return result
+
+array = [1, 2, 3, 4, 5]
+
+iterator(square, array)
+```
