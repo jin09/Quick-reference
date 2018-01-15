@@ -77,3 +77,17 @@ class Users(db.Model):
   name = StringProperty(indexed=False)
   user_id = IntegerProperty(indexed=False)
 ```
+
+## Composite Indexes
+
+Sometimes when we filter on multiple kinds all together or order them  
+then we have to create composite index.  
+We need to update the `index.yaml` in that case.  
+We can either do it manually or when we first run the app locally  
+the google app engine autogenerates the `index.yaml` entry for us.  
+Next all we have to do on terminal is :  
+```
+gcloud app deploy
+gcloud app deploy index.yaml
+```
+Later line is to update indexes on google's cloud
