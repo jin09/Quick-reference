@@ -91,3 +91,63 @@ gcloud app deploy
 gcloud app deploy index.yaml
 ```
 Later line is to update indexes on google's cloud
+
+## Datastore commit process
+
+![Image](../master/assets/datastore_commit.png?raw=true)  
+
+## Datastore Transactions
+
+![Image](../master/assets/transactions.png?raw=true)  
+
+Sample code taken from the completed version of conference central
+```python
+
+@ndb.transactional(xg=True) # xg stands for cross group, check what it means and where it is used
+def _conferenceRegistration(self, request, reg=True):
+    """Register or unregister user for selected conference."""
+    retval = None
+    prof = self._getProfileFromUser() # get user Profile
+
+    # check if conf exists given websafeConfKey
+    # get conference; check that it exists
+    wsck = request.websafeConferenceKey
+    conf = ndb.Key(urlsafe=wsck).get()
+    if not conf:
+        raise endpoints.NotFoundException(
+            'No conference found with key: %s' % wsck)
+
+    # register
+    if reg:
+        # check if user already registered otherwise add
+        if wsck in prof.conferenceKeysToAttend:
+            raise ConflictException(
+                "You have already registered for this conference")
+
+        # check if seats avail
+        if conf.seatsAvailable <= 0:
+            raise ConflictException(
+                "There are no seats available.")
+
+        # register user, take away one seat
+        prof.conferenceKeysToAttend.append(wsck)
+        conf.seatsAvailable -= 1
+        retval = True
+
+    # unregister
+    else:
+        # check if user already registered
+        if wsck in prof.conferenceKeysToAttend:
+
+            # unregister user, add back one seat
+            prof.conferenceKeysToAttend.remove(wsck)
+            conf.seatsAvailable += 1
+            retval = True
+        else:
+            retval = False
+
+    # write things back to the datastore & return
+    prof.put()
+    conf.put()
+    return BooleanMessage(data=retval)
+```
