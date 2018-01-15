@@ -241,7 +241,7 @@ obj.name = "Mike";
 obj['age'] = 25;
 ```
 
-### Copy 1 instance of object (taking snapshot)
+### 1. Copy 1 instance of object (taking snapshot)
 
 Simply run a for loop  
 ```javascript
@@ -254,4 +254,18 @@ var new_obj = {};
 for(var key in obj){
   new_obj[key] = obj[key];
 }
+
+new_obj.hobby = "Dancing";
 ```
+
+### 2. Copy object Prototype Chaining  
+
+Earlier we copied object by taking snapshot so the data is not in sync  
+in both the objects.  
+If I want to lookup a property and I don't find it, I want to lookup  
+that property in the parent object then this is what we use.  
+
+```javascript
+
+```
+![Image](../assets/prototype_chains.png?raw=true)
