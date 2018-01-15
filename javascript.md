@@ -135,3 +135,39 @@ print_p('Test Paragraph!')
 **Note:** When we return the inner function, the inner function **remembers**  
 the lacal variables of the outer functions. This is called a **CLOSURE**  
 **Closures are inner functions that remember the state, or the local variables of outer function**
+
+### `this` in JS
+
+lets pass data to function, create object of that data in function and return it.  
+```javascript
+function make_object(name, age){
+  var obj = {};
+  obj.name = name;
+  obj.age = age;
+  return obj;
+}
+
+var magic_mike = make_object("Mike", 26);
+console.log(magic_mike);
+console.log(magic_mike.name);
+console.log(magic_mike.age);
+```
+
+This is pretty easy to understand, what's going on..  
+But to avoid declaring an object and returning it, JS itself  
+makes an object called `this` and automatically returns this object  
+so it saves us 2 lines of code every time.. eg:  
+```javascript
+function make_object(name, age){
+  //this object will be declared automatically by js
+  this.name = name;
+  this.age = age;
+  //this object will automatically be returned
+}
+
+var magic_mike = new make_object("Mike", 26);
+console.log(magic_mike);
+console.log(magic_mike.name);
+console.log(magic_mike.age);
+```
+By using `this` and `new` we were able to mock the behaviour of constructors in objects.
