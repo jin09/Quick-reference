@@ -318,3 +318,24 @@ var amy_car = Car(2);
 bob_car.move();
 amy_car.move();
 ```
+
+**Problem with this approach**  
+Everytime I have to add a function, I'll have to make that function  
+and add reference to it in the `Car` constructor, I might miss keeping code in sync  
+
+What can be done?  
+We should create object where we write all the functions and we iterate this method object  
+to create references in the Car object.  
+```javascript
+var Car = function(location){
+  var obj = {loc: location};
+  extend(obj, methods); //this is equivalent to running a loop and copying
+  return obj;
+};
+
+methods = {
+  move : function(){
+    this.loc++;
+  }
+};
+```
