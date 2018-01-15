@@ -198,9 +198,65 @@ taskqueue.add(params={'email': user.email(),
 )
 ```
 
-### 1. Pull Queues
+### 2. Pull Queues
 App Engine doesn't executes these tasks, they are instead pulled by workers  
 using the REST API. If task not completed in time then task is put back  
 in the queue. If the external worker doesn't delete the task then also the  
 task is put back in the queue.
 ![Image](../master/assets/pull_queues.png?raw=true)  
+
+### Pull Queues v/s Push Queues
+
+![Image](../master/assets/pull_queues_1.png?raw=true)  
+
+### Where to use what?
+
+![Image](../master/assets/pull_queue_applications.png?raw=true)  
+
+## Cron Jobs
+
+![Image](../master/assets/cron_jobs.png?raw=true)  
+
+### Add Crons by making a cron.yaml
+
+![Image](../master/assets/cron_yaml.png?raw=true)  
+
+## Modules For Scalability
+
+![Image](../master/assets/modules_1.png?raw=true)  
+
+![Image](../master/assets/modules_2.png?raw=true) 
+
+## Types of scaling
+1. Manual Scaling  
+2- Automatic Scaling  
+
+![Image](../master/assets/types_of_scaling.png?raw=true) 
+
+### Automatic Scaling
+
+![Image](../master/assets/automatic_scaling.png?raw=true) 
+
+## Control Instance using Instance Class
+
+![Image](../master/assets/instance_class.png?raw=true) 
+
+## App Stats
+
+![Image](../master/assets/app_stats.png?raw=true) 
+
+## Edge Caching
+When we send request to google, the request is received by the datacentre  
+that is closest to me. That data center finds the datacentre where my application  
+is hosted, then this 2nd datacentre finds the instance and request is delivered.  
+But google provides us the option to cache static content on the data centre that  
+is closest to the users. So that the latency is minimal.  
+
+![Image](../master/assets/edge_caching.png?raw=true) 
+
+![Image](../master/assets/edge_caching_1.png?raw=true) 
+
+## So how to optimize?
+
+![Image](../master/assets/optimising.png?raw=true) 
+This gives us a good understanding of how things should be scaled and optimised.
