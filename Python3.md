@@ -508,3 +508,9 @@ def fuction_to_call():
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno, exc_tb.tb_frame.f_code.co_filename)
 ```
+
+### First Class functions 
+
+**Languages that give the capability to treat functions as regular variables and objects**  
+These functions can be stored in a variable, passed to a function, returned from another function  
+Lets see all these with the help of examples  
