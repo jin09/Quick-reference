@@ -357,3 +357,23 @@ Car.methods = {
 };
 ```
 Simply make this `method` object, a part of Car object
+
+### Improving Performance  
+
+We see that each object has copied version of methods object  
+We could simply make use of **Prototype Chaining** here  
+```javascript
+var Car = function(location){
+  var obj = Object.create(Car.methods);
+  obj.loc = location;
+  return obj;
+};
+
+Car.methods = {
+  move : function(){
+    this.loc++;
+  }
+};
+```
+Now methods won't have to copied, they will stay at top level  
+when lookup for a method fails, parent in chain will be looked up  
