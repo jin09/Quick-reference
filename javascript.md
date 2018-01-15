@@ -240,3 +240,18 @@ var obj = {};
 obj.name = "Mike";
 obj['age'] = 25;
 ```
+
+### Copy 1 instance of object (taking snapshot)
+
+Simply run a for loop  
+```javascript
+var obj = {};
+obj.name = "Mike";
+obj['age'] = 25;
+
+var new_obj = {};
+
+for(var key in obj){
+  new_obj[key] = obj[key];
+}
+```
