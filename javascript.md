@@ -268,4 +268,4 @@ that property in the parent object then this is what we use.
 ```javascript
 
 ```
-![Image](../assets/prototype_chains.png?raw=true)
+![Image](../master/assets/prototype_chains.png?raw=true)
