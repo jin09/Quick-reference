@@ -428,3 +428,51 @@ var ben_car = new Car(2);
 ben_car.move();
 ```
 We had to use `new` to create object this time, so we were able to remove 2 extra lines of code this way  
+
+### Superclasses and Subclasses
+
+Lets say we have 2 types cars, vans and cop cars. They both have  
+common property of car but one has extra method to call and other  
+has extra method to grab  
+```javascript
+var Van = function(loc){
+  var obj = {loc: location};
+  obj.move = function(){
+    obj.loc++;
+  }
+  obj.grab = function(){/**/}
+  return obj;
+}
+
+var Cop = function(loc){
+  var obj = {loc: location};
+  obj.move = function(){
+    obj.loc++;
+  }
+  obj.call = function(){/**/}
+  return obj;
+}
+```
+We see a lot of redundant code, we can refactor it using a superclass of car  
+```javascript
+var Car = function(loc){
+  var obj = {loc: location};
+  obj.move = function(){
+    obj.loc++;
+  }
+  return obj;
+}
+
+var Van = function(loc){
+  var obj = Car(loc);
+  obj.grab = function(){/**/}
+  return obj;
+}
+
+var Cop = function(loc){
+  var obj = Car(loc);
+  obj.call = function(){/**/}
+  return obj;
+}
+```
+We were able to move redundant code in the Car superclass  
