@@ -171,3 +171,24 @@ console.log(magic_mike.name);
 console.log(magic_mike.age);
 ```
 By using `this` and `new` we were able to mock the behaviour of constructors in objects.
+
+### `this` in more detail
+
+```javascript
+var fn = function(one, two){
+  console.log(this, one, two);
+};
+
+var r = {'color': 'red'};
+var g = {'color': 'green'};
+var b = {'color': 'blue'};
+
+r.method = fn;
+r.method(g, b);
+```
+
+**What do you think will be `this` bound to in the above example?**  
+Since `r` is the focal object which is invoking the function,  
+`this` will be bound to `r` and so when we log `this` it will  
+print the object `r`.
+
