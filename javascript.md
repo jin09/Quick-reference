@@ -515,3 +515,19 @@ amy.grab
 Those extra lines of code on Van.prototype may look confusing to you in future  
 refer the tutorials in link below to regain lost clarity of concept. Document if possible  
 [link to tutorial!](https://classroom.udacity.com/courses/ud015/lessons/2794468541/concepts/26931585660923)
+
+### Error Handling in JS
+
+```javascript
+try{
+  //critical code or 
+  throw new Error('Could not parse input');
+}
+catch(err){
+  console.log(err.message, err.lineNumber);
+  console.log(err.stack);
+}
+finally{
+  document.getElementById("demo").value = "";
+}
+```
