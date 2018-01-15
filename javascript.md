@@ -208,3 +208,28 @@ fn(r,g);
 object invoking the function, the `global object` will be logged when we log `this`**
 
 
+### So what happens when I write `new` in front of method invocation?  
+
+**Very Important:** When you invoke method with new in front, a brand new object is  
+created and `this` gets bound to the newly created object.  
+
+```javascript
+var fn = function(one, two){
+  console.log(this, one, two);
+};
+
+var r = {'color': 'red'};
+var g = {'color': 'green'};
+var b = {'color': 'blue'};
+
+r.method = fn;
+new r.method(g, b);
+```
+In the above example, `this` is bound to the newly created object,  
+and so the logged output would be  
+
+```javascript
+{} 
+{color: "green"} 
+{color: "blue"}
+```
