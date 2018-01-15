@@ -190,5 +190,21 @@ r.method(g, b);
 **What do you think will be `this` bound to in the above example?**  
 Since `r` is the focal object which is invoking the function,  
 `this` will be bound to `r` and so when we log `this` it will  
-print the object `r`.
+print the object `r`.  
+
+**If there is no object invoking the method then what do you think will `this` be bound to?**  
+```javascript
+var fn = function(one, two){
+  console.log(this, one, two);
+};
+
+var r = {'color': 'red'};
+var g = {'color': 'green'};
+var b = {'color': 'blue'};
+
+fn(r,g);
+```
+**Since global object is calling the function this time and we don't have a `.` to tell us  
+object invoking the function, the `global object` will be logged when we log `this`**
+
 
