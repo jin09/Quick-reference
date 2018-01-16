@@ -125,13 +125,13 @@ public:
     int a = 10;
 };
 
-class Tiger : virtual public Mammal {
+class Tiger : public virtual Mammal {
 public:
     int b = 20;
     void groom();
 };
 
-class Lion : virtual public Mammal {
+class Lion : public virtual Mammal {
 public:
     int c = 30;
     void groom();
