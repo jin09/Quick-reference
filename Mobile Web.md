@@ -387,7 +387,6 @@ It is no longer supported by the developer, it is dead end.
 Use at your own risk. It is present in Chrome, Safari, Firefox  
 
 **3. Indexed DB**  
-It is no longer supported by the developer, it is dead end.  
-Use at your own risk. It is present in Chrome, Safari, Firefox  
+Right choice for storing complex data  
 
 ![Image](../master/assets/indexed_db.png?raw=true)
