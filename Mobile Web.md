@@ -53,3 +53,8 @@ which basically tells the zoom range
    <meta name="viewport" content="width=device-width, intial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 ```
+## 3. Fluid Layout
+
+Stop fixing height and width in terms of pixcels or points, instead move towards  
+**Percentages and EM**
+![Image](../master/assets/fluid_layout.png?raw=true)
