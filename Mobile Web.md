@@ -56,5 +56,5 @@ which basically tells the zoom range
 ## 3. Fluid Layout
 
 Stop fixing height and width in terms of pixcels or points, instead move towards  
-**Percentages and EM**
+**Percentages and EM**  
 ![Image](../master/assets/fluid_layout.png?raw=true)
