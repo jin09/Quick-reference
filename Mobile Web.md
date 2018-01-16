@@ -171,3 +171,69 @@ We sometime note that, taking input for a number also pops a regular keyboard.
 to avoid this we can make good use of the `type` property of input fields.  
 
 ![Image](../master/assets/input_types.png?raw=true)
+
+### Input Client Side Validations
+
+We can use the pattern property in input tags to specify regular expression to match  
+![Image](../master/assets/input_patterns.png?raw=true)
+
+### Input `required` and `placeholder`
+
+If `required` is present, then you cannot submit the form until that filed is filled.  
+`placeholder` property is used to give hints to the input fields.  
+
+![Image](../master/assets/Required_placeholder.png?raw=true)
+
+### Always wrap inputs in `label`
+
+They increase the area of the input that can be touched.  
+
+![Image](../master/assets/label.png?raw=true)
+
+### Tel Hrefs
+
+We can dial numbers using this link `<a href="tel:+919988776644">DIAL</a>`
+
+![Image](../master/assets/tel_href.png?raw=true)
+
+## 9. Sensors
+
+### Video and Audio
+
+**Get camera and audio access on web**  
+
+![Image](../master/assets/camera_and_audio.png?raw=true)
+
+**What is the problem with this approach?**  
+
+![Image](../master/assets/capture_issues.png?raw=true)
+
+**We can directly get media stream without leaving current application**  
+
+![Image](../master/assets/right_media.png?raw=true)
+
+If I want to capture a snapshot I use the following:  
+
+![Image](../master/assets/take_snapshot.png?raw=true)
+
+**We can choose what camera to capture content from - front facing or primary**  
+
+![Image](../master/assets/camera_sources.png?raw=true)
+
+### Geolocation
+
+![Image](../master/assets/geolocation.png?raw=true)
+
+### Accelerometer
+
+![Image](../master/assets/accelorometer.png?raw=true)
+
+**What to use when?**  
+
+![Image](../master/assets/orientation_vs_motion.png?raw=true)
+
+![Image](../master/assets/device_motion_code.png?raw=true)
+
+### Vibration On Web
+
+![Image](../master/assets/vibration.png?raw=true)
