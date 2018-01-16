@@ -237,3 +237,156 @@ If I want to capture a snapshot I use the following:
 ### Vibration On Web
 
 ![Image](../master/assets/vibration.png?raw=true)
+
+## 10. Offline and Storage
+
+### Always code offline first app
+
+![Image](../master/assets/offline_first.png?raw=true)
+
+### Storage: HTML5 Application Cache (aka Appcache)
+
+We start by specifying the manifest file in the main `<html>` tag  
+```html
+<html manifest="manifest.appcache">
+   <head>
+   </head>
+</html>
+```
+
+This file `manifest.appcache` may look something like this:  
+
+```appcache
+CACHE MANIFEST
+#version 1.0
+
+CACHE:
+bower_components/requirejs/require.js
+favicon.ico
+styles/aab0066e.main.css
+scripts/1396e6bc.main.js
+scripts/vendor/f7f27360.modernizr.js
+images/icon.png
+images/favorite_icon.png
+images/schedule_bg.png
+images/locate_icon.png
+images/filter_icon.png
+images/Roboto-light.woff
+images/Roboto-medium.woff
+images/Roboto-bold.woff
+images/maptiles/floor0-v2.svg
+images/maptiles/floor1-v2.svg
+images/maptiles/floor2-v2.svg
+images/mapmarkers/food.svg
+images/mapmarkers/info.svg
+images/mapmarkers/power.svg
+images/mapmarkers/room.svg
+images/mapmarkers/toilet.svg
+images/profiles/chris_wilson.jpg
+images/profiles/colt_mcanlis.jpg
+images/profiles/eric_bidelman.jpg
+images/profiles/matt_gaunt.jpg
+images/profiles/paul_kinlan.jpg
+images/profiles/peter_lubbers.jpg
+images/profiles/sam_dutton.jpg
+images/profiles/sandro_paganotti.jpg
+json/sessions/session01.json
+json/sessions/session02.json
+json/sessions/session03.json
+json/sessions/session04.json
+json/sessions/session05.json
+json/sessions/session06.json
+json/sessions/session07.json
+json/sessions/session08.json
+json/sessions/session09.json
+json/speakers/chris_wilson.json
+json/speakers/colt_mcanlis.json
+json/speakers/eric_bidelman.json
+json/speakers/matt_gaunt.json
+json/speakers/paul_kinlan.json
+json/speakers/peter_lubbers.json
+json/speakers/sam_dutton.json
+json/speakers/sandro_paganotti.json
+json/maps.json
+json/schedule.json
+json/speakers.json
+
+# / is wildcard for all pages  
+# so, for all pages, offline.html will be displayed if the user is offline
+# NB path is relative to this file
+#FALLBACK:
+#/ offline.html
+
+# Resources that require the user to be online
+NETWORK:
+http://www.google-analytics.com/ga.js
+http://maps.googleapis.com/
+http://maps.gstatic.com/
+http://mt0.googleapis.com/
+http://mt1.googleapis.com/
+http://csi.gstatic.com/
+http://fonts.googleapis.com/
+http://themes.googleusercontent.com/
+
+
+#*
+```
+**Note:** When the user loads the page for the first time, it will hit the server and  
+download relevant resources and create a local cache in browser. The next time request  
+is made to that page, the resources under the `CACHE` section of `manifest.appcache`  
+gets loaded locally and no server request is made.
+
+**Problem:** When I make a change in the future, the app still loads from cache and the change  
+doesn't take effect.  
+
+**How to fix this problem?**  
+Whenever we make a change, we should also change the version of the `manifest.appcache` file  
+by chaging the `2nd line` of `manifest.appcache`.  
+This way the resources would first be loaded from server and then the cache will be updated.  
+
+**Problem with using the Appcache `manifest file`**
+
+![Image](../master/assets/manifest_challenge.png?raw=true)
+
+**Concept:** When the manifest file changes on the server, the manifest on my  
+local machine is updated asynchronously when the page is fetched.  
+Since our app is offline first, the page may already be done loading from the old cache  
+In order to get the latest one, we need to refresh again.  
+Luckily we can capture the event of cache getting updated and then reload page from javascript  
+
+```javascript
+// Check if a new cache is available on page load.
+window.addEventListener('load', function(e) {
+
+  window.applicationCache.addEventListener('updateready', function(e) {
+    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+      // Browser downloaded a new app cache.
+      if (confirm('A new version of this site is available. Load it?')) {
+        window.location.reload();
+      }
+    } else {
+      // Manifest didn't changed. Nothing new to server.
+    }
+  }, false);
+
+}, false);
+```
+
+### Local Data Storage
+
+![Image](../master/assets/local_storage_types.png?raw=true)
+
+**1. JS LocalStorage**  
+
+![Image](../master/assets/local_storage.png?raw=true)
+
+In order to store binalry files or sturctured data, we have WEBSQL API and Indexed DB
+
+**2. WebSQL**  
+It is no longer supported by the developer, it is dead end.  
+Use at your own risk. It is present in Chrome, Safari, Firefox  
+
+**3. Indexed DB**  
+Right choice for storing complex data  
+
+![Image](../master/assets/indexed_db.png?raw=true)
