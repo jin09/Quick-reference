@@ -29,3 +29,8 @@ gcloud config list --all
 ```
 gcloud app deploy [path/to/app.yaml]
 ```
+or go to the dir where your `app.yaml` is and hit the command  
+
+```
+gcloud app deploy
+```
