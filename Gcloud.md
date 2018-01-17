@@ -40,3 +40,9 @@ gcloud app deploy
 ```
 gcloud app deploy index.yaml
 ```
+
+### Logout the gcloud google account
+
+```
+gcloud auth revoke
+```
