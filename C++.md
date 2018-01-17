@@ -150,4 +150,29 @@ int main()
 }
 ```
 Now Tiger and Lion inherit Mammal virtually so only 1 copy of Mammal would be created  
-this time which is the right thing to do as we want to save redundant memory.
+this time which is the right thing to do as we want to save redundant memory.  
+
+### Logarithms
+
+**What logarithm even means?**  
+
+Example: log<sub>10</sub>100  
+
+base = 10  
+what should be the power to 10 to get the answer as 100  
+
+10<sup>x</sup> = 100  
+
+so x = 2  
+
+**what are logarithm used for?**  
+It is used to solve x when x is an exponent  
+
+**Logs and Algorithms**  
+**How many times must we double 1 before we get to n?**  
+or  
+**How many times must we divide nn in half in order to get back down to 1?**  
+
+```
+For both the correct answer is log (n)  -- log base 2 n
+```
