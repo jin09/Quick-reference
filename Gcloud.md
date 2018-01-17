@@ -34,3 +34,9 @@ or go to the dir where your `app.yaml` is and hit the command
 ```
 gcloud app deploy
 ```
+
+### Deploy indexes on google cloud  
+
+```
+gcloud app deploy index.yaml
+```
