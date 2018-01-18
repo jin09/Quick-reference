@@ -375,7 +375,7 @@ The above code snippet should be added to all the pages, this will
 automate the process of reload for the user.  
 
 **Note:** The html page that specifies `manifest.appcache` is automatically cached  
-But it is a good practice to add it to `manifest file` irrespective of that.  
+But it is a good practice to add those HTML pages to `manifest file` irrespective of that.  
 
 ### Local Data Storage
 
