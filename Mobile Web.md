@@ -371,6 +371,8 @@ window.addEventListener('load', function(e) {
 
 }, false);
 ```
+The above code snippet should be added to all the pages, this will  
+automate the process of reload for the user.  
 
 ### Local Data Storage
 
