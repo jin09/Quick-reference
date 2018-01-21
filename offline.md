@@ -160,3 +160,22 @@ self.addEventListener('fetch', function(event) {
 ```
 **`fetch` may get content from cache first and then the network**  
 
+### Hijackin requests
+
+service worker can do all sorts of stuff, it can make a network call,  
+modify the results accordingly.  
+Lets see with example  
+
+```javascript
+self.addEventListener('fetch', function(event) {
+  event.responWith(
+    fetch(event.request).then(function(response){
+      if(response.status == 404){
+        return new Response("Page not Found!!")
+      }
+    }).catch(function(){
+      return new Response('Request failed through the network but im there for you offline :)')
+    })
+  );
+});
+```
