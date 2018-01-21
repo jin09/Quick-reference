@@ -377,6 +377,9 @@ automate the process of reload for the user.
 **Note:** The html page that specifies `manifest.appcache` is automatically cached  
 But it is a good practice to add those HTML pages to `manifest file` irrespective of that.  
 
+**Manage Appcache:** `chrome://appcache-internals/`  
+
+
 ### Local Data Storage
 
 ![Image](../master/assets/local_storage_types.png?raw=true)
