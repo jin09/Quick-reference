@@ -276,4 +276,88 @@ also the new cache will go to the new version of cache and the previous version 
 be disturbed as it would still be in use by the currently workin service worker.  
 
 Now when the new version is controlling the pages, then content from the new version  
-will be served from the latest version of the cache.
+will be served from the latest version of the cache.  
+
+### How to get rid of that old cache from previous version of service worker?  
+
+When a new service worker takes over then an event is fired (one time only when it begins to control)  
+this event is `activate` event. It is the perfect time to clear previous caches.  
+
+```javascript
+self.addEventListener('activate', function(event){
+  // ... clear caches and all
+});
+```
+
+We can delete caches when this event fires up.  
+```
+caches.delete('cache_name');     //returns a promise
+```
+But we shall make some strategy to delete previous caches as this can get tedious with time.  
+
+```
+caches.keys(); // get all the caches in the cache box. It also returns a promise
+```
+
+this returns all the caches in the cache box. We can filter names using some in house  
+strategy, then delete all those caches  
+example -  
+```javascript
+var staticCacheName = 'wittr-static-v2';
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('wittr-') &&
+                 cacheName != staticCacheName;
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+});
+```
+
+**Note: We might have updated just 1 css file but for that we are updating the complete cache.  
+This isn't fair**  
+
+### Get the updated app as quickly as possible, give user prompt `a new version available`  
+
+![Image](../master/assets/sw_promise.png?raw=true)
+
+![Image](../master/assets/sw_states.png?raw=true)
+
+![Image](../master/assets/sw_reg_events.png?raw=true)
+
+![Image](../master/assets/sw_update_event.png?raw=true)
+
+Add your understading here after you work it out on code.  
+
+### When user presses `get latest app` then we must send signal to service worker to take over
+
+service worker should call `self.skipWaiting()` to take over the previous version.  
+But this will happen only when button from notification is clicked, so we should  
+send the service worker a message that you can now take over.  
+
+![Image](../master/assets/skip_waiting.png?raw=true)
+
+We can send messages from page to service workers.  
+
+![Image](../master/assets/message.png?raw=true)
+
+So we send message to service worker from the page that you can upgrade yourself,  
+so when service worker receives that message it will call the `self.skipWaiting()`  
+
+Now when the service worker has changed, it hasn't really refreshed te page with new content, so  
+service worker sends an event that new page that it has changed. `controllerchange`  
+
+So in main js, we listen for this event and we reload the page.  
+
+```javascript
+navigator.serviceWorker.addEventListener('controllerchange', function(){
+  window.location.reload();
+});
+```
