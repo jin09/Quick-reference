@@ -361,3 +361,21 @@ navigator.serviceWorker.addEventListener('controllerchange', function(){
   window.location.reload();
 });
 ```
+
+## Indexed DB
+
+We want to cache the incoming streaam of messages, and play around with it.  
+So we need some sort of a database to achieve the same functionality.  
+That is where `IndexedDB` comes in. It is like a normal database(No SQL).  
+But it has a very bad reputation in the software industry.  
+
+**Why?**  
+It is because of its very bad API.  
+It makes the code look clumsy.  
+So we have a library that works on `IndexedDB` but uses very clean code.  
+
+```
+IndexedDB Promised
+```
+very small API, that uses promises rather than events.  
+
