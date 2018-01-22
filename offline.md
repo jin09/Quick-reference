@@ -179,3 +179,101 @@ self.addEventListener('fetch', function(event) {
   );
 });
 ```
+
+### Nested Network Calls
+
+```javascript
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).then(function(response) {
+      if (response.status === 404) {
+        // TODO: instead, respond with the gif at
+        // /imgs/dr-evil.gif
+        // using a network request
+        return fetch('/imgs/dr-evil.gif');
+      }
+      return response;
+    }).catch(function() {
+      return new Response("Uh oh, that totally failed!");
+    })
+  );
+});
+```
+
+## Cache Box
+
+![Image](../master/assets/cache.png?raw=true)
+
+It is a shared pool of local cache:  
+
+![Image](../master/assets/cache_box.png?raw=true)
+
+### Cache Syntax
+
+![Image](../master/assets/cache_syntax.png?raw=true)
+
+`addall` uses the `fetch` under the hood, so network requests go through the  
+cache first and then the network.  
+`addall` is atomic operation, if any request inside addall fails then, none would  
+be added to the cache  
+
+### When to cache?
+
+**During the install event**  
+
+![Image](../master/assets/cache_install.png?raw=true)
+
+```javascript
+self.addEventListener('install', function(event){
+  event.wawitUntil(
+    //for progress
+  );
+})
+```
+
+**Problem**  
+We cache only on install event, and a service woker gets installed only once.  
+So if we want posts, or some data to cache periodically or on every refresh then we have to comeup with some  
+new strategy.  
+
+![Image](../master/assets/current_problems.png?raw=true)
+
+**Another Problem**  
+Lets say I update the static content on the server but when the user  
+refreshes there is no change that happens, why?  
+Because the **service worker doesn't update yet**  
+Because we changed the static content and not the service worker,  
+that is why content is served from cache and the cache is not updated.  
+
+**How to fix?**  
+Whenever you make a change to the static content, we have to make a  
+change to the service worker as well, so that a new version of service worker  
+will fire up. This new version will have its own install event `where we should cache  
+the new static content in a new cache and delete the previous version of cache`  
+
+
+![Image](../master/assets/update_stale.gif?raw=true)  
+
+```javascript
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open('wittr-static-v2').then(function(cache) {
+      return cache.addAll([
+        '/',
+        'js/main.js',
+        'css/main.css',
+        'imgs/icon.png',
+        'https://fonts.gstatic.com/s/roboto/v15/2UX7WLTfW3W8TclTUvlFyQ.woff',
+        'https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff'
+      ]);
+    })
+  );
+});
+```
+See how I changed the version of cache in this new service worker install event  
+Since I made a change to the service worker, a new version of it will fire up  
+also the new cache will go to the new version of cache and the previous version will not  
+be disturbed as it would still be in use by the currently workin service worker.  
+
+Now when the new version is controlling the pages, then content from the new version  
+will be served from the latest version of the cache.
