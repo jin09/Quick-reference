@@ -216,4 +216,30 @@ SELECT AVG(downloads)
 ```
 
 The AVG function works by taking a column name as an argument  
-and returns the average value for that column.
+and returns the average value for that column.  
+
+### ROUND
+
+By default, SQL tries to be as precise as possible without rounding.  
+We can make the result set easier to read using the ROUND function.  
+
+ROUND function takes two arguments inside the parenthesis:  
+
+~ a column name  
+~ an integer  
+
+It rounds the values in the column to the number of decimal places specified by the integer.  
+
+```sql
+SELECT ROUND(price, 0)
+ FROM fake_apps;
+ ```
+ round it to 0 decimal places  
+ 
+ ```sql
+ SELECT round(AVG(price), 2)
+ FROM fake_apps;
+ ```
+ rounds off to 2 decimal places
+ 
+ 
