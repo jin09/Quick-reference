@@ -424,3 +424,19 @@ SELECT column_name(s) FROM table1
 UNION ALL
 SELECT column_name(s) FROM table2;
 ```
+
+## `With` give query result a name alias and treat it like usual table
+
+Using `with` we can give a query result a name and later use it as a table in  
+a query. Maybe if I want to join the calculated result to another table, that way I can use  
+the `with` operator to give an `alias` to a query.  
+
+```sql
+WITH previous_query as  
+(SELECT customer_id,
+       COUNT(subscription_id) as subscriptions
+FROM orders
+GROUP BY customer_id)
+select customers.customer_name, previous_query.subscriptions
+from previous_query join customers on previous_query.customer_id = customers.customer_id;
+```
