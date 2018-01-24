@@ -146,3 +146,14 @@ SELECT name,
  END as 'review'
 FROM movies;
 ```
+A more detail example with default else statement  
+
+```sql
+SELECT name,
+ CASE
+  WHEN genre = 'romance' THEN 'fun'
+  WHEN genre = 'comedy' THEN 'fun'
+  ELSE 'serious'
+ END as 'mood'
+FROM movies;
+```
