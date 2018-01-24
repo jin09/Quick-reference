@@ -439,6 +439,19 @@ INTERSECT
 SELECT column_name(s) FROM table2;
 ```
 
+## EXCEPT
+
+`EXCEPT` is constructed in the same way, but returns distinct rows from the first  
+`SELECT` statement that aren’t output by the second `SELECT` statement.
+
+``sql
+SELECT column_name(s) FROM table1
+
+EXCEPT
+
+SELECT column_name(s) FROM table2;
+```
+
 ## `With` give query result a name alias and treat it like usual table
 
 Using `with` we can give a query result a name and later use it as a table in  
