@@ -242,4 +242,107 @@ SELECT ROUND(price, 0)
  ```
  rounds off to 2 decimal places
  
+ ### Group By
+ 
+ For instance, we might want to know the mean IMDb ratings for all  
+ movies each year. We could calculate each number by a series of queries  
+ with different WHERE statements, like so:  
+ 
+ ```sql
+ SELECT AVG(imdb_rating)
+ FROM movies
+ WHERE year = 1999;
+
+ SELECT AVG(imdb_rating)
+ FROM movies
+ WHERE year = 2000;
+
+ SELECT AVG(imdb_rating)
+ FROM movies
+ WHERE year = 2001;
+ ```
+ We can do this by `group by`  
+ 
+ ```sql
+ SELECT year,
+    AVG(imdb_rating)
+ FROM movies
+ GROUP BY year
+ ORDER BY year;
+ ```
+
+The `GROUP BY` statement comes after any `WHERE` statements, but before `ORDER BY` or `LIMIT`.  
+
+### Question:
+**add a WHERE clause to count the total number of apps that has been  
+downloaded more than 20,000 times, at each price.**  
+
+```sql
+SELECT price, COUNT(*) 
+ FROM fake_apps 
+ where downloads > 20000
+ GROUP BY price;
+ ```
+ 
+ Sometimes, we want to GROUP BY a calculation done on a column.
+
+For instance, we might want to know how many movies have IMDb ratings  
+that round to 1, 2, 3, 4, 5. We could do this using the following syntax:  
+
+```sql
+ SELECT ROUND(imdb_rating),
+    COUNT(name)
+ FROM movies
+ GROUP BY ROUND(imdb_rating)
+ ORDER BY ROUND(imdb_rating);
+ ```
+ However, this query may be time-consuming to write and more prone to error.  
+ 
+ SQL lets us use column reference(s) in our GROUP BY that will make our lives easier.  
+
+* 1 is the first column selected
+* 2 is the second column selected
+* 3 is the third column selected
+and so on.  
+
+The following query is equivalent to the above:  
+
+```sql
+SELECT ROUND(imdb_rating),
+    COUNT(name)
+ FROM movies
+ GROUP BY 1
+ ORDER BY 1;
+ ```
+ 
+ ```sql
+ SELECT category, 
+    price,
+    AVG(downloads)
+ FROM fake_apps
+ GROUP BY 1, 2;
+ ```
+ 
+ ### `Having` 
+ 
+ Used to filter the grouped data, so written after `group by`  
+ 
+ ```sql
+ SELECT year,
+    genre,
+    COUNT(name)
+ FROM movies
+ GROUP BY 1, 2
+ HAVING COUNT(name) > 10
+ 
+ 
+ 
+ SELECT price, 
+    ROUND(AVG(downloads))
+ FROM fake_apps
+ GROUP BY price
+ having  count(*) > 9;
+ ```
+ 
+ 
  
