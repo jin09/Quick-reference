@@ -440,3 +440,15 @@ GROUP BY customer_id)
 select customers.customer_name, previous_query.subscriptions
 from previous_query join customers on previous_query.customer_id = customers.customer_id;
 ```
+
+## Nested Queries using `IN` operator
+
+1. find flight information about flights where the origin elevation is less than 2000 feet.
+```sql
+SELECT * 
+FROM flights 
+WHERE origin in (
+    SELECT code 
+    FROM airports 
+    WHERE elevation < 2000);
+```
