@@ -453,7 +453,7 @@ WHERE origin in (
     WHERE elevation < 2000);
 ```
 
-## Nested Query 
+## Complex Query 
 
 ```sql
 SELECT a.dep_month,
@@ -469,4 +469,13 @@ SELECT a.dep_month,
        ) a
  GROUP BY 1,2
  ORDER BY 1,2;
+ ```
+
+```sql
+SELECT id
+FROM flights AS f
+WHERE distance < (
+ SELECT AVG(distance)
+ FROM flights
+ WHERE carrier = f.carrier);
  ```
