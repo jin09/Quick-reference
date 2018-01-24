@@ -346,10 +346,81 @@ SELECT ROUND(imdb_rating),
  
  ## Combine table on common data using `join`
  
+ ### Inner joins `join`
+ 
+ **This join is called inner join**
+ 
  ```sql
  SELECT orders.order_id,
        customers.customer_name
 FROM orders JOIN customers ON orders.customer_id = customers.customer_id
 ```
+When we perform a simple JOIN (often called an inner join) our  
+result only include rows that match our ON condition.
 
- 
+![Image](../master/assets/inner-join.gif?raw=true)
+
+### `LEFT OUTER JOIN`
+
+SQL lets us do this through a command called `LEFT JOIN`.  
+A left join will keep all rows from the first table, regardless  
+of whether there is a matching row in the second table.
+
+```sql
+select * 
+from newspaper left join online on newspaper.id = online.id;
+```
+
+![Image](../master/assets/left-join.gif?raw=true)  
+
+### `RIGHT OUTER JOIN`
+
+Similar to `left outer join`, where we show dominant records of right table  
+
+```sql
+select * 
+from newspaper right join online on newspaper.id = online.id;
+```
+extra records of right table will be shown  
+
+### `FULL OUTER JOIN`  
+
+Non matching records of both tables will be shown.  
+
+```sql
+select * 
+from newspaper full outer join online on newspaper.id = online.id;
+```
+
+### CROSS JOIN
+
+Also called, `CARTESIAN PRODUCT`.  
+
+```sql
+select month,
+  COUNT(*) as subscribers
+from newspaper cross join months
+where month > start_month and month < end_month
+group by month;
+```
+
+## Union
+
+Append query outputs one after the other only if they are of same type  
+
+* Each SELECT statement within UNION must have the same number of columns
+* The columns must also have similar data types
+* The columns in each SELECT statement must also be in the same order
+
+```sql
+// Doesn't allow duplicate columns
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+
+//alloes duplicate data as well
+
+SELECT column_name(s) FROM table1
+UNION ALL
+SELECT column_name(s) FROM table2;
+```
