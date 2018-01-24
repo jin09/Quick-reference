@@ -157,3 +157,41 @@ SELECT name,
  END as 'mood'
 FROM movies;
 ```
+
+## Aggregate
+
+Here is a quick preview of some important aggregates that we will cover in the next five exercises:  
+
+`COUNT`: count the number of values  
+`SUM`: add up all of the values in a column  
+`MAX/MIN`: get the largest/smallest value  
+`AVG`: get the mean for all values in a column  
+`ROUND`: round the values in the column  
+
+### Count
+
+COUNT is a function that takes the name of a column as an argument and  
+counts the number of non-empty values in that column.  
+
+```sql
+SELECT COUNT(*)
+ FROM table_name;
+```
+
+```sql
+SELECT COUNT(*) 
+ FROM fake_apps where price = 0;
+ ```
+ 
+ ### SUM
+ 
+ SQL makes it easy to add all values in a particular column using SUM.
+
+SUM is a function that takes the name of a column as an argument and  
+returns the sum of all the values in that column.  
+
+```sql
+SELECT SUM(downloads)
+ FROM fake_apps;
+ ```
+
