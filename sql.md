@@ -425,6 +425,20 @@ UNION ALL
 SELECT column_name(s) FROM table2;
 ```
 
+## Intersect
+
+`INTERSECT` is used to combine two `SELECT` statements, but returns rows only from  
+the first `SELECT` statement that are identical to a row in the second `SELECT` statement.  
+This means that it returns only common rows returned by the two `SELECT` statements.
+
+```sql
+SELECT column_name(s) FROM table1
+
+INTERSECT
+
+SELECT column_name(s) FROM table2;
+```
+
 ## `With` give query result a name alias and treat it like usual table
 
 Using `with` we can give a query result a name and later use it as a table in  
