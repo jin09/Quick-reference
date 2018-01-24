@@ -349,8 +349,7 @@ SELECT ROUND(imdb_rating),
  ```sql
  SELECT orders.order_id,
        customers.customer_name
-FROM orders
-JOIN customers ON orders.customer_id = customers.customer_id
+FROM orders JOIN customers ON orders.customer_id = customers.customer_id
 ```
 
  
