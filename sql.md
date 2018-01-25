@@ -63,8 +63,9 @@ The aliases only appear in the result.
 ```sql
 SELECT name AS 'lala', imdb_rating AS 'IMDb'
  FROM movies;
- 
- ## `Distinct`
+```
+
+## `Distinct`
  
  ```sql
  SELECT DISTINCT genre 
