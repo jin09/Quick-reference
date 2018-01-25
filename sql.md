@@ -514,3 +514,64 @@ SELECT id, avg(a.sale_price) FROM (
   SELECT id, sale_price FROM order_items_historic) AS a 
   GROUP BY 1;
   ```
+
+## DATETIME
+
+Dates are often written in the following format
+
+1. Date: YYYY-MM-DD
+
+2. Datetime or Timestamp: YYYY-MM-DD hh:mm:ss
+
+We can use SQL's date functions to transform data into a desired format.  
+Since date functions can be database specific, verify the functions that  
+exist on your relational database management system.  
+
+For example, this statement  
+```sql
+SELECT DATETIME(manufacture_time)
+FROM baked_goods;
+```
+`Datetime` function converts dates/time/datetimes/text to `datetime` format.  
+So if date is stored as `text`, then datetime converts it to appropriate `datetime` format  
+
+## DATE
+
+Similarly we have `DATE()` function works the same way as DATETIME,  
+but convert value into a `date` format.  
+
+```sql
+SELECT DATE(manufacture_time), count(*) as count_baked_goods
+FROM baked_goods
+GROUP BY DATE(manufacture_time);
+```
+
+## TIME
+
+Same as `DATE` function, but here it converts the value into a `time` format.  
+
+```sql
+SELECT TIME(manufacture_time), count(*) as count_baked_goods
+FROM baked_goods
+GROUP BY TIME(manufacture_time);
+```
+
+## ADD SUBTRACT TIME
+
+We can add and subtract time to create new columns  
+
+```sql
+select datetime(delivery_time, '+5 hours', '20 minutes', '2 days') as package_time
+from baked_goods;
+```
+
+## Strings
+
+A common use case for string manipulation in SQL is concatenation of strings.  
+In SQLite, this is written as  
+
+```sql
+SELECT first_name || ' ' || last_name as full_name
+FROM bakeries;
+```
+
