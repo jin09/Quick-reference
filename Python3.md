@@ -21,6 +21,36 @@ random.randint(1, 60)
 # This will generate a random integer in range 1 to 59
 ```
 
+### Find first occurance of substring in string
+
+```python
+my_string = "Hello !"
+print my_string.find('l')
+# This finds first occurance of 'l' in string 'hello' 
+
+>>> 2
+```
+
+### find multiple occurance of substring in a string
+
+second argument we pass the place where is starts its search from  
+that index is included in search.  
+
+```python
+my_string = 'hi hello hi !!'
+print my_stirng.find('h', 0)
+
+>>> 0
+
+print my_string.find('hi', 4)
+
+>>> 9
+
+print my_string.find('h', 1)
+
+>>> 3
+```
+
 ### Add a pause to program
 
 ```python
