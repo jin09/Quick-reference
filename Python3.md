@@ -819,3 +819,24 @@ def main():
 if __name__ == "__main__":
   main()
 ```
+
+## Operator Overloading
+
+```python
+class Point:
+    def __init__(self, x = 0, y = 0):
+        self.x = x
+        self.y = y
+    
+    def __str__(self):
+        return "({0},{1})".format(self.x,self.y)
+    
+    # predefined function to overload for add operator (+)
+    def __add__(self,other):
+        x = self.x + other.x
+        y = self.y + other.y
+        return Point(x,y)
+```
+![Image](../master/assets/overload.png?raw=true)
+
+![Image](../master/assets/overload_1.png?raw=true)
