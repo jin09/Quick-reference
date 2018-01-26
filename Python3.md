@@ -51,6 +51,79 @@ print my_string.find('h', 1)
 >>> 3
 ```
 
+### String formatting
+
+```python
+my_string = "{}___{}".format('hello', 292)
+
+>>> hello____292
+
+# We can also specify the index of argument before hand
+my_string = "{1}----{0}----{1}".format(23,'world')
+
+>>> world----23----world
+```
+
+### Count occurance of substring in a string
+
+```python
+my_string = 'helloollooll'
+print my_String.find("ll")
+
+>>> 3
+```
+
+### Convert string to all upper case
+
+```python
+my_string = 'hello'
+print my_string.upper()
+
+>>> HELLO
+```
+
+### Convert string to all lower case 
+
+```python
+my_string = 'HELLO'
+print my_string.lower()
+
+>>> hello
+```
+
+### Capitalize 1st letter in string
+
+```python
+my_string = 'happy birthday!!'
+my_string.capitalize()
+
+>>> Happy birthday!!
+```
+
+### Capitalize 1st letter of each word
+
+```python
+my_string = 'happy birthday!!'
+my_string.title();
+
+>>> Happy Birthday!!
+```
+
+### String validation methods
+
+```python
+x = "string"
+
+x.istitle()
+x.iscapitalize()
+x.isupper()
+x.islower()
+
+x.isalpha() # only alphabets
+x.isdigit() # only numbers
+x.isalnum() # alphabets and numbers
+```
+
 ### Add a pause to program
 
 ```python
