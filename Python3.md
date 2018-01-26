@@ -215,6 +215,34 @@ b = a
 c = a.copy()
 ```
 
+### Convert list into a tuple
+
+```python
+a = [1, 2, 4]
+b = tuple(a)
+
+>>> (1, 2, 4)
+```
+
+### Get all keys in dictionary
+
+```python
+dict = {'a':1, 'b':2, 'c': 3, 'd': 4}
+dict.keys()
+
+>>> ['a', 'b', 'c', 'd']
+```
+
+### Get all item pairs in dictionary
+Returns a list of tuples
+
+```python
+dict = {'a':1, 'b':2, 'c': 3, 'd': 4}
+dict.items()
+
+>>> [('a', 1), ('c', 3), ('b', 2), ('d', 4)]
+```
+
 ### if key not found then set it to some default value
 
 ```python
