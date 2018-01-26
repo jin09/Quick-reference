@@ -449,6 +449,28 @@ A.go()
 >>> "Go to the school !!"
 ```
 
+### Class Methods
+
+* A class method is a method which is bound to the class and not the object of the class.  
+* They have the access to the state of the class as it takes a class parameter that points to the class and not the object instance.  
+* It can modify a class state that would apply across all the instances of the class. For example it can modify a class variable that will be applicable to all the instances.  
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+     
+    # a class method to create a Person object by birth year.
+    @classmethod
+    def fromBirthYear(cls, name, year):
+        return cls(name, date.today().year - year)
+
+person1 = Person('Roshi', 22)
+person2 = Person.fromBirthYear('Master', 1996)
+```
+Class methods are mostly used for creating factory methods.
+
 ### 'with' statement and context management protocol
 
 ```python
