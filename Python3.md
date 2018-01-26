@@ -133,6 +133,15 @@ my_string.strip('0')
 >>> happyBirthday
 ```
 
+### Make single string from list
+
+```python
+a = ['a', 'b', 'c']
+':'.join(a)
+
+>>> 'a:b:c'
+```
+
 ### List Slicing
 
 ```
