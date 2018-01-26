@@ -806,3 +806,13 @@ example:
  
  lis.sort(key=lambda x: x.lower())
 ```
+
+### Creating python modules
+
+```python
+def foo():
+  pass
+  
+if __name__ == "__main__":
+  main()
+```
