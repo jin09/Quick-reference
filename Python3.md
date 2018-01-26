@@ -432,6 +432,23 @@ class CountFromBy:
     print("Clean up code ! deleting object")
 ```
 
+### Static Methods
+
+These methods don't have any `cls` param or `self` param.  
+They are simple utility functions that can be called without  
+the object as well.  
+
+```python
+class A():
+  @staticmethod
+  def go():
+    print "Go to the school !!"
+
+A.go()
+
+>>> "Go to the school !!"
+```
+
 ### 'with' statement and context management protocol
 
 ```python
