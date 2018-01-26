@@ -224,6 +224,12 @@ b = tuple(a)
 >>> (1, 2, 4)
 ```
 
+### List Comprehension
+
+```python
+even_numbers = [for i in range(0,20) if i%2 == 0]
+```
+
 ### Get all keys in dictionary
 
 ```python
