@@ -775,3 +775,25 @@ print_p('Test Paragraph!')
 ```
 **Note:** When we return the inner function, the inner function **remembers**  
 the lacal variables of the outer functions. This is called a **CLOSURE**  
+
+### Anonymous functions or Lambda Expressions
+
+Lambda expressions are used to create anonymous functions  
+Syntax:  
+```
+lambda [arguments] : [return expression]
+```
+
+example:  
+```python
+# No args
+ fun = lambda : "hello world"
+ 
+ # 1 arg
+ fun = lambda x : 3x + 1
+ 
+ # 2 args
+ fun = lambda x,y : 3x + 4y
+ 
+ lis.sort(key=lambda x: x.lower())
+```
