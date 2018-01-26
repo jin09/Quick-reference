@@ -267,6 +267,22 @@ a.setdefault('e', 0)
 # if 'e' is found in dict then it wont be touched, if not found then it will be set to the default value of 0
 ```
 
+### Avoid key errors
+
+`.get(key)` returns the corresponding value if found  
+else returns `None`  
+
+```python
+a = {'a': 1}
+a['e']
+
+>>> KeyError
+
+a.get('e')
+
+>>> None
+```
+
 ### creating sets
 
 ```python
