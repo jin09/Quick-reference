@@ -147,6 +147,15 @@ time.sleep(5)
 # adds a pause of 5 seconds
 ```
 
+### Add element at particular location in the list
+
+```python
+users = ['alice', 'bob']
+users.insert('roma', 1)
+
+>>> ['alice', 'roma', 'bob']
+```
+
 ### delete 1st occurance in list
 
 ```python
