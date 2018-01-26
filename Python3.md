@@ -812,7 +812,10 @@ example:
 ```python
 def foo():
   pass
-  
+
+def main():
+  foo()
+
 if __name__ == "__main__":
   main()
 ```
