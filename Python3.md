@@ -416,6 +416,14 @@ class CountFromBy:
   
   def __repr__(self) -> str:
     return str(self.val)
+  
+  # when you print the object, this method will be called
+  def __str__(self):
+    print(self.val)
+  
+  # Destructor
+  def __del__(self):
+    print("Clean up code ! deleting object")
 ```
 
 ### 'with' statement and context management protocol
