@@ -124,6 +124,21 @@ x.isdigit() # only numbers
 x.isalnum() # alphabets and numbers
 ```
 
+### Remove pattern from string
+
+```python
+my_string = '00000happyBirthday0000'
+my_string.strip('0')
+
+>>> happyBirthday
+```
+
+### List Slicing
+
+```
+[start:end:step]
+```
+
 ### Add a pause to program
 
 ```python
