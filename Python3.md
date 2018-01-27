@@ -21,6 +21,11 @@ random.randint(1, 60)
 # This will generate a random integer in range 1 to 59
 ```
 
+### NOTE
+
+* Primitive data types like integers/strings/float/etc get passed to functions by value
+* Other data types gets passed in as reference and not by value (list, set, dictionary)
+
 ### Find first occurance of substring in string
 
 ```python
