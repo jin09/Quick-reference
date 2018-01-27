@@ -445,7 +445,7 @@ SELECT column_name(s) FROM table2;
 `EXCEPT` is constructed in the same way, but returns distinct rows from the first  
 `SELECT` statement that aren’t output by the second `SELECT` statement.
 
-``sql
+```sql
 SELECT column_name(s) FROM table1
 
 EXCEPT
