@@ -668,7 +668,24 @@ dbconfig = { 'host': '127.0.0.1',
 conn = mysql.connector.connect(**dbconfig)
 ```
 
-### Fuction Decorators
+## Fuction Decorators
+
+### simplest decorator
+
+```python
+def decorator_func(original_func):
+    def wrapper_func():
+        print "some code before the {} function".format(original_func.__name__)
+        return original_func()
+    return wrapper_func()
+
+@decorator_func
+def original():
+    print "This is original"
+    return
+
+decorate = decorator_func(original)
+```
 
 **Motivation** : Lets say I want to allow access to a route function only  
 if the user is logged in  
