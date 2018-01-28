@@ -425,3 +425,22 @@ dbPromise.then(function(db) {
   console.log('Added foo:bar to keyval');
 });
 ```
+
+### Change the database initialisation, upgrading version
+
+We explicitly don't add break after each `case` so that it can chain downwards.  
+
+```javascript
+var dbPromise = idb.open('test-db', 2, function(upgradeDb) {
+  switch(upgradeDb.oldVersion){
+    case 0:
+      // means that browser knows about version 0
+      var keyValStore = upgradeDb.createObjectStore('keyval');
+      keyValStore.put("world", "hello");
+      // keep in mind that left is value and right param is key
+    case 1:
+      // means that browser knows about version 1
+      upgradeDb.createObjectStore('people', {keyPath: 'name'});
+  }
+});
+```
