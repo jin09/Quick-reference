@@ -379,3 +379,49 @@ IndexedDB Promised
 ```
 very small API, that uses promises rather than events.  
 
+**All read write operations in indexedDB must be a part of a transaction**  
+
+![Image](../master/assets/transaction.gif?raw=true)
+
+### Database setup and initialisaton
+
+```javascript
+import idb from 'idb';
+
+var dbPromise = idb.open('test-db', 1, function(upgradeDb) {
+  var keyValStore = upgradeDb.createObjectStore('keyval');
+  keyValStore.put("world", "hello");
+  // keep in mind that left is value and right param is key
+});
+```
+This code creates an objectstore in database with the name `test-db` and  
+inserts a pair `hello:world` in the object-store.  
+If there already exists a object-store with that name then it is returned,  
+else the callback function is used.  
+
+### Create transaction to read from the data-base
+
+```javascript
+// read "hello" in "keyval"
+dbPromise.then(function(db) {
+  var tx = db.transaction('keyval');
+  var keyValStore = tx.objectStore('keyval');
+  return keyValStore.get('hello');
+}).then(function(val) {
+  console.log('The value of "hello" is:', val);
+});
+```
+
+### Create transaction to write into the database
+
+```javascript
+// set "foo" to be "bar" in "keyval" object-store
+dbPromise.then(function(db) {
+  var tx = db.transaction('keyval', 'readwrite');
+  var keyValStore = tx.objectStore('keyval');
+  keyValStore.put('bar', 'foo');
+  return tx.complete;
+}).then(function() {
+  console.log('Added foo:bar to keyval');
+});
+```
