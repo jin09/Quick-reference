@@ -517,3 +517,46 @@ dbPromise.then(function(db) {
   console.log('Cat people:', people);
 });
 ```
+
+## Cursors in Indexed DB
+
+We can Iterate over the result set instead of calling the `getAll()`.  
+
+### Get First item in the cursor
+
+```javascript
+dbPromise.then(function (db) {
+  var tx = db.transaction('people');
+  var peopleStore = tx.objectStore('people');
+  var ageIndex = peopleStore.index('age');
+  return ageIndex.openCursor();
+}).then(function (cursor) {
+  if(!cursor){
+    return;
+  }
+  console.log('cursor at: ', cursor.value.name); //logs the person's name at that cursor position
+});
+```
+
+### Advance the cursor
+
+We move the cursor forward by `cursor.continue();`  
+**We can feed the cursor to the function recursively which would break  
+when the cursor is `undefined`**  
+
+```javascript
+dbPromise.then(function (db) {
+  var tx = db.transaction('people');
+  var peopleStore = tx.objectStore('people');
+  var ageIndex = peopleStore.index('age');
+  return ageIndex.openCursor();
+}).then(function logPerson(cursor) {
+  if(!cursor){
+    return;
+  }
+  console.log('cursor at: ', cursor.value.name);
+  return cursor.continue().then(logPerson);
+}).then(function(){
+  console.log('Done Cursoring !!');
+});
+```
