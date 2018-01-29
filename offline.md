@@ -578,3 +578,9 @@ cursor.delete();
 ```javascript
 cursor.advance(3);
 ```
+
+### Move cursor backwards
+
+```javascript
+.openCursor(null, 'prev')
+```
