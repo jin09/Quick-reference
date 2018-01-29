@@ -444,3 +444,76 @@ var dbPromise = idb.open('test-db', 2, function(upgradeDb) {
   }
 });
 ```
+
+### Create index
+
+We would have to tinker with the database initialisation so,  
+we need to change the version of the database and the add new  
+switch statement to the block.  
+
+```javascript
+var dbPromise = idb.open('test-db', 4, function(upgradeDb) {
+  switch(upgradeDb.oldVersion) {
+    case 0:
+      var keyValStore = upgradeDb.createObjectStore('keyval');
+      keyValStore.put("world", "hello");
+    case 1:
+      upgradeDb.createObjectStore('people', { keyPath: 'name' });
+    case 2:
+      var peopleStore = upgradeDb.transaction.objectStore('people');
+      peopleStore.createIndex('animal', 'favoriteAnimal');
+    case 3:
+      var peopleStore = upgradeDb.transaction.objectStore('people');
+      peopleStore.createIndex('age', 'age');
+  }
+});
+```
+`case 2` and `case 3` show us the way of doing it  
+
+### Sort the result set
+
+Make sure index is created according to which you want to sort the results  
+
+```javascript
+// list all people sorted by favourite animal
+dbPromise.then(function(db) {
+  var tx = db.transaction('people');
+  var peopleStore = tx.objectStore('people');
+  var animalIndex = peopleStore.index('animal');
+
+  return animalIndex.getAll();
+}).then(function(people) {
+  console.log('All people sorted by favourite animal:', people);
+});
+```
+
+People soted by their age:  
+
+```javascript
+// list people by age
+dbPromise.then(function (db) {
+  var tx = db.transaction('people');
+  var peopleStore = tx.objectStore('people');
+  var animalIndex = peopleStore.index('age');
+  return animalIndex.getAll();
+}).then(function (people) {
+  console.log(people);
+});
+```
+
+### Filter the result set
+
+We can also filter the indexed data
+
+```javascript
+// list all cat people
+dbPromise.then(function(db) {
+  var tx = db.transaction('people');
+  var peopleStore = tx.objectStore('people');
+  var animalIndex = peopleStore.index('animal');
+
+  return animalIndex.getAll('cat');
+}).then(function(people) {
+  console.log('Cat people:', people);
+});
+```
