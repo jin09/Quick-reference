@@ -560,3 +560,21 @@ dbPromise.then(function (db) {
   console.log('Done Cursoring !!');
 });
 ```
+
+### Update Value at current position of cursor
+
+```javascript
+cursor.update(newValue);
+```
+
+### Delete Value at cursor position
+
+```javascript
+cursor.delete();
+```
+
+### skip cursor
+
+```javascript
+cursor.advance(3);
+```
