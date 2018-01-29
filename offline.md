@@ -584,3 +584,16 @@ cursor.advance(3);
 ```javascript
 .openCursor(null, 'prev')
 ```
+
+## Caching Images
+
+```javascript
+event.respondWith(
+  caches.open('images').then(function(cache){
+    return fetch(request).then(function(response){
+      cache.put(request, response.clone());
+      return response;
+    });
+  })
+);
+```
