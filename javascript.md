@@ -531,3 +531,104 @@ finally{
   document.getElementById("demo").value = "";
 }
 ```
+
+## Promises
+
+When we need to handle asynchronous code we use `javascript promises`.  
+An example of asynchronous code can be `network calls or event callbacks`.  
+
+![Image](../master/assets/async.png?raw=true)
+
+One way we can create sequence for async tasks are the callback methods  
+But that can grow nasty very quickly..  
+
+![Image](../master/assets/seq.png?raw=true)
+
+**!! SPOILER ALERT !!**  
+
+![Image](../master/assets/spoiler.png?raw=true)
+
+### Promise Terminology
+
+![Image](../master/assets/promise_term.png?raw=true)
+
+### Promise vs Events
+
+If a `eventListener` is set after the event has occured then we would  
+miss the events that happenned before setting the `Listener`.  
+Lets say there were some events that occur before the listener could get parsed,  
+those events would ge missed.  
+Whereas using promises we never miss an event.  
+
+![Image](../master/assets/promise_vs_events.png?raw=true)
+
+### Promise Constructor
+
+![Image](../master/assets/promise_constructor.png?raw=true)
+
+Promise can be settled only once, so the second `resolve` goes un-noticed.  
+
+### Promise Example
+
+**`Resolves` calls `.then` and `reject` calls `.catch`**  
+
+![Image](../master/assets/promise_example.png?raw=true)
+
+![Image](../master/assets/promise_example2.png?raw=true)
+
+![Image](../master/assets/promise_example3.png?raw=true)
+
+### Example with promises
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promisify setTimeout</title>
+</head>
+<body>
+	<h1>Did the promise finish?</h1>
+	<div class="completion">Not yet</div>
+	<script>
+		function wait(ms) {
+			/*
+			Your code goes here!
+
+			Instructions:
+			(1) Wrap this setTimeout in a Promise. resolve() in setTimeout's callback.
+			(2) console.log(this) inside the Promise and observe the results.
+			(3) Make sure wait returns the Promise too!
+			 */
+			 var promise = new Promise(function(resolve, reject){
+			 	console.log(this);
+			 	window.setTimeout(resolve(), ms);
+			 });
+			
+			return promise;
+		};
+
+		/*
+		Uncomment these lines when you want to test!
+		You'll know you've done it right when the message on the page changes.
+		 */
+		var milliseconds = 2000;
+		wait(milliseconds).then(finish);
+
+
+		// This is just here to help you test.
+		function finish() {
+			var completion = document.querySelector('.completion');
+			completion.innerHTML = "Complete after " + milliseconds + "ms.";
+		};
+	</script>
+</body>
+</html>
+```
+
+**Inside a promise, `this` has a scope of `GLOBAL`**  
+
+### then and catch are quite similar
+
+![Image](../master/assets/then_catch.png?raw=true)
+
