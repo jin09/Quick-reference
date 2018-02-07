@@ -576,3 +576,16 @@ SELECT first_name || ' ' || last_name as full_name
 FROM bakeries;
 ```
 
+## LIMIT AND OFFSET
+
+```sql
+select * from students limit 2 offset 2
+```
+This above query returns 3rd and 4th result in the output.  
+
+**We can also specify the offset using the second parameter in the `limit`**  
+
+```sql
+select * from students limit 2,3
+```
+This above query returns 4th and 5th result in the output.
