@@ -878,3 +878,30 @@ class Point:
 ![Image](../master/assets/overload.png?raw=true)
 
 ![Image](../master/assets/overload_1.png?raw=true)
+
+## Virtual Environment
+
+First install virtual-environment  
+```
+# go in to the project directory
+
+cd project-dir/
+```
+
+```
+# Create virtual environment in that project directory
+
+virtualenv env
+```
+
+```
+# activate that virtual-environment
+
+source env/bin/activate
+```
+
+```
+# deactivate this virtual directory
+
+deactivate
+```
