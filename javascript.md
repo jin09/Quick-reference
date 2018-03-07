@@ -22,6 +22,16 @@ console.log(global_variable + ' ' + new_variable);
 **Best Practice**  
 Always write var before the variable declaration !!  
 
+### Important Results regarding `Null` and `undefined`  
+
+```javascript
+typeof undefined           // undefined
+typeof null                // object
+
+null === undefined         // false
+null == undefined          // true
+```
+
 ### Javascript and Functions
 
 **1. Normal Function Declaration**  
