@@ -905,3 +905,37 @@ source env/bin/activate
 
 deactivate
 ```
+
+## Some insights
+
+### Single leading underscore variables and functions `_hello`
+
+It is a convention to declare private variables and functions for internal use only  
+so `from module import *` ignores these variables and methods.  
+
+```python
+_private_variable = 'This is a prvate variable'
+```
+
+### Single trailing underscore `hello_`
+
+To avoid conflicts with built-ins. Not used very often.  
+
+```python
+list_ = List.new_type_of_list()
+```
+
+### Double Leading underscores `__hello`
+
+Used for truely private data or methods, although they are not completely private but they still can be  
+used as a convention.  
+
+```python
+__private_member = "You need to do special things to be able to access me outside my package.."
+```
+
+### Double leading and trailing underscores `__magic__`
+
+Called magic mthods or variables.  
+`__file__` indicates the location of Python file, `__eq__` is executed when a == b expression is excuted.  
+
