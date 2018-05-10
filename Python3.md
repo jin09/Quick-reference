@@ -1037,3 +1037,56 @@ t2.start()
 print 'exiting !!'
 ```
 We will observe that before thread 2 completes the main program will stop execution
+
+### Synchronisation Mechanisms  
+
+When there is a common resource on which 2 threads are working, then  
+we must synchronise both threads, as they will produce different result everytime.  
+
+Example: 
+
+```python
+x = 0 # A shared value
+
+def foo():
+ global x
+ for i in xrange(100000000): x += 1
+
+def bar():
+ global x
+ for i in xrange(100000000): x -= 1
+
+t1 = threading.Thread(target=foo)
+t2 = threading.Thread(target=bar)
+
+t1.start(); t2.start()
+t1.join(); t2.join() # Wait for completion
+
+print x # Expected result is 0
+```
+Everytime you run this, it will produce a different result.  
+
+### 1. Mutex Locks
+
+```python
+import threading
+
+m = threading.Lock()
+m.acquire()    # Acquire the lock
+m.release()    # Release the lock
+```
+
+Always follow this prototype:  
+
+```python
+x = 0
+x_lock = threading.Lock()
+
+# Example critical section
+x_lock.acquire()
+
+try:
+ statements using x
+finally:
+ x_lock.release()
+```
