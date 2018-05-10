@@ -1090,3 +1090,14 @@ try:
 finally:
  x_lock.release()
 ```
+
+Improved syntax to deal with mutex locks:  
+
+```python
+x = 0
+x_lock = threading.Lock()
+
+# Critical section
+with x_lock:
+ statements using x
+```
