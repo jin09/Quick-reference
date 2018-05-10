@@ -939,3 +939,26 @@ __private_member = "You need to do special things to be able to access me outsid
 Called magic mthods or variables.  
 `__file__` indicates the location of Python file, `__eq__` is executed when a == b expression is excuted.  
 
+## Threading in Python
+
+Threads are defined by a class, you just override the run method of Thread and it is good to go.  
+
+```python
+import time
+import threading
+
+class CountdownThread(threading.Thread):
+ def __init__(self,count):
+  threading.Thread.__init__(self)
+  self.count = count
+ 
+ def run(self):
+  while self.count > 0:
+    print "Counting down", self.count
+    self.count -= 1
+    time.sleep(5)
+ return
+ 
+ thread1 = CountdownThread(10)
+ thread1.start()
+```
