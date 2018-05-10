@@ -962,3 +962,78 @@ class CountdownThread(threading.Thread):
  thread1 = CountdownThread(10)
  thread1.start()
 ```
+
+### Launch a function as Thread
+
+```python
+import threading
+
+def print_hello():
+  for i in range(5):
+    print 'hello '
+    
+def print_world():
+  for i in range(5):
+    print "world !"
+
+t1 = threading.Thread(target=print_hello, args=())
+t2 = threading.Thread(target=print_world, args=())
+
+t1.start()
+t2.start()
+```
+
+### Wait for 1 thread before you start another using `join()`
+
+Lets say we have dependancy of other threads on the one of the threads, so this thread must complete  
+before anyone else dependant on it starts executing. For this we make the main thread wait before it  
+executes other threads.  
+
+```python
+import threading
+
+def print_hello():
+  for i in range(5):
+    print 'hello '
+    
+def print_world():
+  for i in range(5):
+    print "world !"
+
+t1 = threading.Thread(target=print_hello, args=())
+t2 = threading.Thread(target=print_world, args=())
+
+t1.start()
+t1.join()
+t2.start()
+```
+Now thread 1 completes execution so all 'hello' are printed before 'world'  
+
+### Daemon Threads
+
+Right now, main thread waits for other threads to complete and then exits.  
+If I want to exit the main thread and execute other threads in background  
+then I can use daemon threads.  
+
+```python
+import threading
+import time
+
+def print_hello():
+  for i in range(5):
+    print 'hello '
+
+def print_world():
+  for i in range(10):
+    print "world !"
+
+t1 = threading.Thread(target=print_hello, args=())
+t2 = threading.Thread(target=print_world, args=())
+t2.setDaemon(True)
+
+t1.start()
+t1.join()
+t2.start()
+print 'exiting !!'
+```
+We will observe that before thread 2 completes the main program will stop execution
