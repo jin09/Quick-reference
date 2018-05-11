@@ -1144,3 +1144,8 @@ internals when it's running**
 
 It controls thread execution.  
 
+**Why do we need GIL?**
+
+The GIL makes it easy to integrate with external libraries that are not thread-safe,  
+and it makes non-parallel code faster.  
+
