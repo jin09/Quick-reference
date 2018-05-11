@@ -1101,3 +1101,46 @@ x_lock = threading.Lock()
 with x_lock:
  statements using x
 ```
+
+## Python Thread Performance Testing
+
+```python
+def count(n):
+ while n > 0:
+ n -= 1
+ 
+# Case 1
+count(100000000)
+count(100000000)
+
+# Case 2
+t1 = Thread(target=count,args=(100000000,))
+t1.start()
+t2 = Thread(target=count,args=(100000000,))
+t2.start()
+```
+We might expect the 2nd to run twice as fast.  
+
+Results:  
+```
+2 CORE CPU: 
+Sequential : 24.6s
+Threaded : 45.5s (1.8X slower!)
+
+1 CORE CPU:
+Threaded : 38.0s
+```
+Bwaaahhhh !!!! Makes no sense !  
+Threaded runs 1.8x slower and runs slightly faster on reducing cores.  
+
+### Deep Dive into python internals
+
+**Only one Python thread can execute in the interpreter at once**  
+
+**The GIL ensures that sure each thread gets exclusive access to the entire interpreter  
+internals when it's running**  
+
+### GIL (Global Interpreter Lock)  
+
+It controls thread execution.  
+
