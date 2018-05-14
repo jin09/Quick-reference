@@ -1149,3 +1149,79 @@ It controls thread execution.
 The GIL makes it easy to integrate with external libraries that are not thread-safe,  
 and it makes non-parallel code faster.  
 
+
+# David P3 TuT
+
+## Get command line args
+
+**python3 try.py 234 6545**  
+
+```python
+import sys
+
+args_list = sys.argv # ['try.py', '234', '6545']
+```
+
+## Don't always write python3 to execute that script
+
+Add a shebang/poundbang to the top of the script.  
+
+```python
+#!/usr/bin/env python3
+```
+
+Now make the script an executable file.  
+
+```cmd
+chmod +x try.py
+```
+
+## Debugging
+
+### 1. Run script in 'Interactive' mode
+
+If you executed a program and it gave you an error. Then launch the program in interactive mode  
+to see all memory variables etc. We do it simply using :  
+
+```cmd
+python3 -i try.py 234 6456
+```
+
+If we ran this program without the flag -i then this program gives an error.  
+Now in interactive mode, we can check if everything data in the program is the way  
+we expect it to be or not.  
+
+
+### 2. Run the pdb in interactive mode  
+
+While in the interactive mode import pdb  
+
+```python
+import pdb
+```
+ after importing we can run post mortem to get to the point where it failed and do stuff after.  
+ 
+ ```python
+ pdb.pm()
+ ```
+ 
+ ### 3. Set manual breakpoint in the code (preffered !)  
+ 
+ We set manual breakpoint in the code using pdb  
+ 
+ ```python
+ import pdb
+ pdb.set_trace() # BREAKPOINT
+ ```
+ The code stops execution when this line hits, and we are taken to the interactive pdb console.  
+ We can use several commands inside the pdb console:  
+ 
+ * n -> execute next line
+ * c -> complete execution
+ * l -> list 3 lines before and after current line
+ * s -> step into function call
+ * b -> list of all breakpoints
+ * b[int] -> set breakpoint at that line number
+ * b[funct] -> set breakpoint at that function  
+ * p -> print variables  
+ 
