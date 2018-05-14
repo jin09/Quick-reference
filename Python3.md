@@ -1225,3 +1225,27 @@ import pdb
  * b[funct] -> set breakpoint at that function  
  * p -> print variables  
  
+ ## print output to file   
+ 
+ ```python
+ out = open('output.txt', 'w')
+ print('hello world !', file=out)
+ out.close()
+ ```
+
+## Read CSV  
+
+Takes care of a lot of things, that you don't have to manually.  
+Always make a habbit of using this library when workingwith csv.  
+
+```python
+import csv
+
+file = open('output.csv', 'r')
+lines = csv.reader(file)
+
+for line in lines:
+  print(line)
+
+file.close()
+```
