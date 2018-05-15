@@ -1346,3 +1346,97 @@ from .module2 import function1
 from .module2 import function2
 ```
 Now I import the package and these literals are available to me.  
+
+```python
+import package
+
+res = package.function1() # these functions are directly available to me from package.
+```
+
+## Classes
+
+Classes are collection of variables and functions.  
+**NOTE : Inherit class from object**  
+
+```python
+class MyClass(object):
+  def __init__(self, arg):
+    self.arg = arg
+  
+  def print_hello_and_arg(self):
+    print('hello world ! and ', self.arg)
+```
+
+### Only 3 operations understood by python object model
+
+### 1. Access variables inside object
+
+```python
+obj = MyClass(123)
+print(obj.arg)
+
+# We can use method to access attribute
+print(getattr(obj, 'arg'))
+
+```
+
+### 2. Change attributes or Add attributes (Set)
+
+```python
+obj = MyClass(123)
+obj.arg = 234
+
+# we can add new attribute
+obj.newarg = 999
+print(obj.newarg)
+
+
+# We can use method to set attribute
+print(setattr(obj, 'arg', 98989))
+```
+
+### 3. Delete existing attribute from the object
+
+```python
+obj = MyClass(123)
+
+# delete attribute
+del obj.arg
+```
+
+## Multiple constructors and rise of `classmethods`
+
+We can have only one `__init__` method in a class. But if I want to initialise in  
+a different way, then  I'll have to use `classmethods`  
+
+```python
+class Date(object):
+  def __init__(self, day, month, year):
+    self.day = day
+    self.month = month
+    self.year = year
+    
+  @classmethod
+  def from_string(cls, date_string # 'dd-mm-yyyy'):
+    lis = date_string.split("-")
+    return cls(lis[0], lis[1], lis[2])
+  
+  @classmethod
+  def todays_date(cls):
+    import time
+    t = time.localtime()
+    return cls(t.tm_year, t.tm_mon, t.tm_mday)
+    
+    
+a = Date(21, 3, 2018)
+b = Date.from_string('21-03-2018')
+c = Date.todays_date()
+```
+
+### Classmethods
+
+class methods allow us to  create multiple constructor to a class.  
+Use the previous code example to understand what is happening.  
+
+**WHEN WE INVOKE CLASSMETHODS, THEN THE CLASS INVOKING THAT METHOD GETS PASSED TO `cls`**  
+So whatever is to the left of `dot` gets captured in the `cls`.  
