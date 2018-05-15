@@ -1249,3 +1249,100 @@ for line in lines:
 
 file.close()
 ```
+
+## Get counter in the special for loop of python `Enumerate`
+
+If I want index of iterable in the list, I had to maintain a counter outside of loop,  
+and then update the counter inside the loop. This is bad.  
+To get iterated item and index we use the enumerate in the special for loop.  
+It retuens a tuple of (index, element)  
+
+```python
+for i, val in enumerate(items):
+  print 'index:', i, 'val:', val
+```
+
+## Modules
+
+when we write a script in a file, we can import that file as a module.  
+This allows us to reuse the code inside that module.  
+
+**When we import a module then all of its code is executed before its code gets copied**  
+
+### `import mod` vs `from mod import submod`
+
+We sometimes think that latter way of import is more efficient that than the former.  
+But that is not true. In both cases, complete modules are imported and put in the memory.  
+But when we import sub mod, it only exposes a small part.  
+
+**Both methods of import are same.**  
+
+POINTS TO PONDER:  
+
+* when an import is made then it caches that import statement and doesn't execute the same code again if same import is made again.
+```python
+import sys
+
+sys.modules # returns a dictionary of cached or already imported modules.
+
+# If I were to delete a module from this dictionary and then try import 
+# that module again, then codeof that modile will be executed again.
+```
+
+* It is possible that module that we are trying to import is not in the directory that we currently are in. Modules are looked up in the list of paths available in the `sys.path`. We can add a new path in this `sys.path` list so that python can look for modules in that directory.  
+```python
+import sys
+
+paths = sys.path # list of paths known to python interpretor.
+
+sys.path.append('..') # puts the directory one level up in that list of paths known to python
+```
+
+## Packages
+
+We can pack the modules in a package. 
+
+**How?**
+* Create a folder and add all the modules in that folder.  
+* Create a new empty file in that folder `__init__.py`
+* Now we can import this package and modules inside of this package.  
+```python
+import package
+# since we are just importing package and not the modules inside of it. Nothing will happen.
+# We have an empty `__init__.py` which is why nothing will happen on importing just the package
+
+import package.module
+This will actually import the module inside of that package
+```
+* If we have modules importing each other in the package then always do **relative package import**  
+```python
+from . import module # always follow this, never gives error
+```
+
+### `__init__.py` in packages
+
+We usually do all the initialisations in this file. So when we import this package, this is the  
+file that is run. Acts like a constructor to the package import.  
+
+```python
+# __init__.py
+
+print("You imported this package !!")
+```
+
+Important Takeaways :  
+
+* If I have a package, I basically don't know the location of a particular function or a class.  
+  So that as a user of a package, I dont have to find a particular variable, function or a class,  
+  one must import those functions and classes inside `__init__.py`, so that as soon package is imported  
+  I have all those functions available to me
+  
+```python
+# __init__.py
+
+from .module1 import function1
+from .module1 import function2
+from .module2 import function1
+from .module2 import function2
+```
+Now I import the package and these literals are available to me.  
