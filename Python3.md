@@ -1440,3 +1440,142 @@ Use the previous code example to understand what is happening.
 
 **WHEN WE INVOKE CLASSMETHODS, THEN THE CLASS INVOKING THAT METHOD GETS PASSED TO `cls`**  
 So whatever is to the left of `dot` gets captured in the `cls`.  
+
+## Inheritance
+
+We can inherit from base class. This way we can borrow all the code from that of base class. 
+
+```python
+
+class Child(Parent):
+  def new_method(self):
+    print("This is a brand new method !!")
+```
+
+**Why Inheritance ?**  
+
+* We can add extra funtionality to the new class, while keeping all the other from base class.  
+* Change the functionality of some function of base class, that you want different in child class.  
+* add extra functionality to a method of base class without disturbing the logic of function in base.  
+
+```python
+class Parent(object):
+  def __init__(self, value):
+    value = value
+  
+  def spam():
+    print('Parent Class ', self.value)
+  
+
+class Child(Parent):
+  def spam():
+    print("this is child class !")
+    super().spam()
+
+
+if __name__ == "__main__":
+  a = Child(23)
+  a.spam()
+  
+# OUTPUT:
+this is child class !
+Parent Class 23
+```
+We were able to wrap the functionality of base class function in the child class.  
+**Somewhat like how decorators work !!**  
+
+* Add extra attributes to the child class. after handling extra parameter, we must call the constructor  
+of the base class explicitly.  
+
+```python
+class Parent(object):
+  def __init__(self, value):
+    value = value
+  
+  def spam():
+    print('Parent Class ', self.value)
+  
+class Child(Parent):
+  def __init__(self, value, extra):
+    self.extra = extra
+    super().__init__(value)
+
+a = Child(12, 32)
+```
+
+## Abstract Base Classes
+
+**How to make a abstract class ?**  
+
+```python
+from abc import ABC, abstractmethod
+
+class MyAbstracClass(ABC):
+  
+  @abstractmethod
+  def method1(self, argument):
+    pass
+  
+  @abstractmethod
+  def method2(self, argument):
+    pass
+```
+Now we can inherit from this class and we now know what all methods are neccesary to override.  
+
+## How inheritance works
+
+```python
+class Parent(object):
+  def spam():
+    print("Parent.spam")
+  
+class A(Parent):
+  def spam():
+    print("A.spam")
+    super().spam()
+  
+class B(A):
+  def spam():
+    print(B.spam)
+    super().spam()
+
+a = A()
+b = B()
+
+a.spam()
+""">>>  A.spam
+        Parent.spam
+"""
+b.spam()
+""">>>B.spam
+      A.spam
+      Parent.spam
+
+"""
+```
+
+**How does the object know what to call when it sees a super?**  
+
+Every class keeps a record of its parent in a attribute called `__mro__`  
+
+```python
+# In the previous code keep the code as it is.
+B.__mro__
+# out: [B, A, Parent, object]
+```
+
+If B inherits from multiple classes and super is called, then method is resolved order wise.  
+
+```python
+class B(A, C, D):
+  def spam():
+    super().spam()
+```
+A, C, D have `spam()` then, their spam will be called in the same order i.e.  
+
+```
+OUTPUT:  
+A.spam
+B.spam
+C.spam
+```
