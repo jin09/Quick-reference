@@ -1579,3 +1579,171 @@ A.spam
 B.spam
 C.spam
 ```
+
+## Python Magic Methods
+
+Any operation we do on python object is tied to some **Magic Method**.  
+For example:  
+
+```python
+x = 42
+x + 10
+
+# >>> 52
+
+# It is same as x.__add__(10)
+
+# Mul: x.__mul__(5)
+
+num = ['123', '321', '345']
+num[1]
+
+# >>> '321'
+It is same as num.__getitem__(1)
+
+num[1] = 999
+# It is same as num.__setitem__(1, 999)
+
+```
+
+### Making use of magic methods in custom objects
+
+Sometimes we create an object and try to print it then, we get some text printed out,  
+that we dont understand. So to make it more human readable and debuggable, we define  
+`__repr__` and `__str__`method.  
+
+```python
+class A(object):
+  def __init__(self, a, b):
+    self.a = a
+    self.b = b
+    
+  def __repr__(self):
+    return 'A({}, {})'.format(self.a, self.b)
+  
+  def __str__(self):
+    return 'A has {}, {}'.format(self.a, self.b)
+```
+
+Difference between `__repr__` and `__str__` is that  
+`__str__` is used when we perform a print  
+`__repr__` otherwise  
+
+## Classes and Objects deep down at memory level in python
+
+Every object that we create in python is wrapper around the `python doctionary`  
+When we initiate a object in `__init__` we basically are setting values in its dictionary.  
+We can access that dictionary by `__dict__` on that object. See the example  
+
+```python
+class A(object):
+  def __init__(self, a, ,b, c):
+    self.a = a
+    self.b = b
+    self.c = c
+
+obj = A(12, 34, 56)
+obj.__dict__
+
+# this will output the dictionary of object i.e {'a': 12, 'b': 34, 'c': 56}
+``` 
+
+So all objects in python are dictionary.  
+But what about the methods? Where are they stored. They are not in the `__dict__`  
+**Methods are stored in the class's dictionary**  
+
+```python
+class A(object):
+  def __init__(self, a, ,b, c):
+    self.a = a
+    self.b = b
+    self.c = c
+  
+  def print_values(self):
+    print('{}, {}, {}'.format(self.a, self.b, self.c))
+
+A.__dict__
+# this will show the methods in the class A
+```
+
+## Owning the dot operator
+
+Because python is very flexible it allows me to access the attributes using a dot.  
+Example:  
+
+```python
+class A(object): 
+  def __init__(self, a, b):
+    self.a = a
+    self.b = b
+
+obj = A(12, 34)
+obj.a = 'hello world'
+```
+
+We can access the attributes, set them.  
+But lets say I don't want the user to set the value of an attribute as string.  
+It must always be `int`. So how do I control the 'dot' operator  
+
+### Approach 1 - make that variable private and use getter and setter 
+
+```python
+class A(object):
+  def __init__(self, a, b):
+    self._a = a
+    self._b = b
+
+  def get_a(self):
+    return self.a
+  
+  def set_a(self, a):
+    if not isinstance(a, float):
+      raise TypeError('Can only set variable to float')
+    self._a = a
+```
+
+Problem with this approach:  
+
+* We have to make a lot of changes, add `_` to all the variables that we have to make private
+* User can still access the private and set it because python is extremely flexible.  
+* How will you enforce the user to use the getters and setters.  
+
+### Approach 2 - add property decorator to get and set functions for that attribute
+
+Rules to achieve this without errors:  
+
+* getter and setter functions should be the same name as the attribute
+* getter should have `@property` decorator
+* setter should have `@att.setter` decorator, see example
+* getter and setter should always access the attribute privately i.e. `_attribute`
+* attribute in `__init__` should not have `_`, it should be used normally
+
+```python
+class A(obj):
+  def __init__(self, a, b):
+    self.a = a
+    self.b = b
+  
+  @property
+  def a(self):
+    return self.a
+  
+  @a.setter
+  def a(self, a):
+    if not isinstance(a, int):
+      raise TypeError('int expected !')
+    self.a = a
+
+x = A(12, 3)
+
+x.a = '12'
+# It will raise a type error since we are trying to set a to a string
+```
+
+Using the above example we saw how we can gain control over the `dot` operator.  
+We can do all sorts of type checkin with this approach.  
+
+**Turns out that for every attribute, I will have to crete these pair of getter and setter**  
+**which is kind of repetetive and long and ugly**  
+
+### Approach 3 - Descriptors
