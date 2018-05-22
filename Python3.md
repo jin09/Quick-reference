@@ -1747,3 +1747,5 @@ We can do all sorts of type checkin with this approach.
 **which is kind of repetetive and long and ugly**  
 
 ### Approach 3 - Descriptors
+
+
