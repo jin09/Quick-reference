@@ -1746,6 +1746,67 @@ We can do all sorts of type checkin with this approach.
 **Turns out that for every attribute, I will have to crete these pair of getter and setter**  
 **which is kind of repetetive and long and ugly**  
 
+
+### #How `dot` operator works internally?  
+
+We have 2 ways of using the `dot` i.e. `get` and `set`  
+
+1. x = a.val , get 
+2. a.val = x , set
+
+when we use the `dot` to get value, then `__get__` magic method is looked for in the class dictionary.  
+
+```python
+x = a.val
+# is equivalent to 
+x = a.__class__.__dict__['val'].__get__(a)
+```
+
+Similarly when we use it to set value then `__set__` magic method is looked for.  
+
+```python
+x = 1000
+a.val = x
+# is equivalent to 
+a.__class__.__dict__['val'].__set__(a, x)
+```
+**Note that how `__get__` and `__set__` are used**  
+
 ### Approach 3 - Descriptors
 
+We can set the type of attribute at class level, it manages the getters and setters of that type.  
+
+**Rules:**  
+ 
+* Create a new descriptor class which will act as the manager for an attribute in actual class  
+* Pass exact name of attribute to the descriptor while in `__init__`, because that is the key  
+  of the dictionary which it will use to set or get
+* Both `__set__` and `__get__` get `instance` as parameter, so use it to access the instance dictionary  
+* All the typechecks happen in the `__set__`
+* When you make use of the descriptor class make those attributes class variables and not instance variable.  
+
+```python
+class Integer(object):
+  def __init__(self, name):
+    self.name = name
+  
+  def __get__(self, instance, cls):
+    return instance.__dict__[self.name]
+  
+  def __set__(self, instance, value):
+    if not isinstance(value, int):
+      raise TypeError("Expected int")
+    instance.__dict__[self.name] = value
+
+class Point(object):
+  a = Integer('a')
+  b = Integer('b')
+  def __init__(self, a, b):
+    self.a = a
+    self.b = b
+```
+
+Look at just the `Point` class, see how clean and neat is its syntax. It clearly explains the  
+intent behind those class attributes. This will enforce the user set the value to `int` even if  
+`dot` operator is used.  
 
