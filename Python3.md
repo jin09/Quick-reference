@@ -1962,3 +1962,14 @@ s = add(2,4)
 s()
 # Inner function remembers the variables of outer function
 ```
+
+## Decorators
+
+lets say I want to add extra functionality to a function.  
+
+```python
+def add(a,b):
+  return a+b
+```
+
+Lets say I want to add logging to this. One way is to manually do it
