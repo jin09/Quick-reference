@@ -1810,3 +1810,111 @@ Look at just the `Point` class, see how clean and neat is its syntax. It clearly
 intent behind those class attributes. This will enforce the user set the value to `int` even if  
 `dot` operator is used.  
 
+### Object Wrappers and Proxies
+
+This is yet another way to own `get`, `set`, and `del` an attribute from object.  
+
+```python
+x.__getattr__('a')
+# or
+getattr(x, 'a')
+
+x.__setattr__('a', 12)
+# or 
+setattr(x, 'a', 23)
+
+x.__deleteattr__('a')
+# or
+delattr(x, 'a')
+```
+
+**Note:**  
+`__getattribute__` gets called everytime we access any attribute.  
+`__getattr__` gets called everytime we try to access some attribute that is not in the object.  
+
+Same is the case with setting and deleting.  
+
+#### Use Case 1: We are not allowed to add any new attribute to our class.  
+
+```python
+class A(object):
+  def __init__(self, a, b, c):
+    self.a = a
+    self.b = b
+    self.c = c
+  
+  def __setattr__(self, name, value):
+    if not name in {'a', 'b', 'c'}:
+      raise AttributeError('unexpected attribute')
+    super().__setattr__(name, value)
+
+x = A(1, 3, 4)
+x.q = 23
+# will raise attribute error
+```
+
+So what we have basically achieved here is that we dont allow user to set any value other than `a, b, or c`  
+So user can not make mistake when setting value. We have allowed user not to add any other attribute to the object.  
+
+
+#### Use Case 2: Make a read only class wrapper for object.  
+
+```python
+class ReadOnly(object):
+  def __init__(self, obj):
+    self.read_only_obj = obj
+    
+  def __getattr__(self, name):
+    return getattr(self.read_only_obj, name)
+    
+  def __setattr__(self, name, value):
+    if name == 'read_only_obj':
+      super().__setattr__(name, value)
+    else:
+      raise AttributeError("Read Only !")
+
+# Usage
+x = A(1,2,4)
+a = ReadOnly(x)
+x.b = 12
+# will raise read only error !
+```
+
+
+#### Use Case 3: extending class methods.  
+
+In many cases we build our own class for example a class that has a list, our class will loose  
+the properties of list.  
+One way to give it all those methods of list is to add them manually.  
+
+```python
+class Holdings(object):
+  def __init__(self): 
+    self.holding = []
+  
+  def append(self, val):
+    self.holding.append(val)
+  
+  def __len__(self):
+    return len(self.holding)
+```
+
+We can already see that in order to give it all that functionality of list,  
+we have to put in a lot of effort, basically re write all the methods of list again.  
+
+To avoid this we can redirect the `get` calls on the objects to the list.  
+
+```python
+class Holdings(object):
+  def __init__(self):  
+    self.holding = []
+  
+  def __getattr__(self, name):
+    # it catches only the attributes not found in the object
+    return getattr(self.holding, name)
+
+x = Holding()
+x.append
+x.insert
+# We see that now this class automatically has these methods on it self.
+```
