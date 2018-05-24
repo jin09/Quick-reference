@@ -1918,3 +1918,47 @@ x.append
 x.insert
 # We see that now this class automatically has these methods on it self.
 ```
+
+## Functions as objects
+
+We can store functions in variables and pass them along.  
+
+```python
+def func():
+  print('Hello World !!')
+
+a = func
+a()
+```
+
+In this above example, what we have seen is we stored the function in another variable and called it later.  
+We also call this Delayed Execution.  
+
+We can pass functions to other functions as well.  
+
+```python
+import time 
+
+def take_func(seconds, func):
+  time.sleep(seconds)
+  func()
+
+def say_hello():
+  print('Hello World !')
+
+take_func(5, say_hello)
+# will print hello winputorld after 5 seconds
+```
+
+### Return inner functions, Closures
+
+```python
+def add(x ,y):
+  def inn():
+    return x+y
+  return inn
+
+s = add(2,4)
+s()
+# Inner function remembers the variables of outer function
+```
