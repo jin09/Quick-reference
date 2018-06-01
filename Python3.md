@@ -770,11 +770,11 @@ def fuction_to_call():
 class singleton(object):
     _instance = None
 
-    def __new__(self):
-        if not self._instance:
-            self._instance = super(singleton, self).__new__(self)
-            self.q = 12
-        return self._instance
+    def __new__(cls):
+        if not cls._instance:
+            cls._instance = super(singleton, cls).__new__(cls)
+            cls.q = 12
+        return cls._instance
 ```
 
 ### First Class functions 
