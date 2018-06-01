@@ -764,6 +764,19 @@ def fuction_to_call():
         print(exc_type, fname, exc_tb.tb_lineno, exc_tb.tb_frame.f_code.co_filename)
 ```
 
+## Singleton Class 
+
+```python
+class singleton(object):
+    _instance = None
+
+    def __new__(self):
+        if not self._instance:
+            self._instance = super(singleton, self).__new__(self)
+            self.q = 12
+        return self._instance
+```
+
 ### First Class functions 
 
 **Languages that give the capability to treat functions as regular variables and objects**  
